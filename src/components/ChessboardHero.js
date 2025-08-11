@@ -176,7 +176,7 @@ const ChessboardHero = () => {
       javascript1: 'https://www.linkedin.com/learning/certificates/02c538610dc21ae580401e59c769b3719f043747cb52918ad5adc1a42bfacd6e?trk=share_certificate',
       javascript2: 'https://www.linkedin.com/learning/certificates/88c1fb84bb52812453329b7cee45660efd09cd5da6de1251d121b5a11b0b22bc?trk=share_certificate',
       codepad: 'https://www.linkedin.com/learning/certificates/02c538610dc21ae580401e59c769b3719f043747cb52918ad5adc1a42bfacd6e?trk=share_certificate',
-      calarts: 'pdf'
+      calarts: 'https://www.coursera.org/account/accomplishments/verify/ERMSKZ7QF3EV'
     };
 
     if (certificates[certType] === 'pdf') {
