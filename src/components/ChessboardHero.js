@@ -399,11 +399,15 @@ const ChessboardHero = () => {
                 <h4>Mobile Development</h4>
                 <p>Engineered cross-platform mobile dashboards using Flutter and Dart. Integrated Firebase for robust authentication, cloud data storage, and real-time synchronization across multiple devices.</p>
                 <div className="skills-used">
+                <span className="skill-tag">Web Development</span>
+                <span className="skill-tag">Android Development & Deployment</span>
+                <span className="skill-tag">iOS Development & Deployment</span>
                   <span className="skill-tag">ReactJS</span>
                   <span className="skill-tag">Flutter</span>
-                  <span className="skill-tag">Firebase</span>
                   <span className="skill-tag">JavaScript</span>
+                  <span className="skill-tag">Redux.js</span>
                   <span className="skill-tag">Dart</span>
+                  <span className="skill-tag">Firebase</span>
                   <span className="skill-tag">Three.js</span>
                 </div>
               </div>
