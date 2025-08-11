@@ -542,7 +542,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">ReactJS</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '95%'}}></div>
+                    <div className="skill-progress" style={{width: '90%'}}></div>
                   </div>
                 </div>
                 <div className="skill-item">
@@ -560,7 +560,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">HTML5</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '95%'}}></div>
+                    <div className="skill-progress" style={{width: '99%'}}></div>
                   </div>
                 </div>
                 <div className="skill-item">
@@ -569,7 +569,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">CSS3</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '90%'}}></div>
+                    <div className="skill-progress" style={{width: '95%'}}></div>
                   </div>
                 </div>
                 <div className="skill-item">
@@ -578,7 +578,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">Three.js</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '85%'}}></div>
+                    <div className="skill-progress" style={{width: '75%'}}></div>
                   </div>
                 </div>
                 <div className="skill-item">
@@ -587,7 +587,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">Redux</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '85%'}}></div>
+                    <div className="skill-progress" style={{width: '95%'}}></div>
                   </div>
                 </div>
               </div>
@@ -620,7 +620,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">Firebase</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '80%'}}></div>
+                    <div className="skill-progress" style={{width: '90%'}}></div>
                   </div>
                 </div>
               </div>
@@ -635,7 +635,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">Bootstrap</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '85%'}}></div>
+                    <div className="skill-progress" style={{width: '95%'}}></div>
                   </div>
                 </div>
                 <div className="skill-item">
@@ -662,7 +662,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">Adobe Creative Suite</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '92%'}}></div>
+                    <div className="skill-progress" style={{width: '62%'}}></div>
                   </div>
                 </div>
                 <div className="skill-item">
@@ -676,11 +676,11 @@ const ChessboardHero = () => {
                 </div>
                 <div className="skill-item">
                   <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg" alt="Electron" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">Electron</span>
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">Tailwind CSS</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '82%'}}></div>
+                    <div className="skill-progress" style={{width: '92%'}}></div>
                   </div>
                 </div>
               </div>
