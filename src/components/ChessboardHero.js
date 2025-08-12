@@ -228,7 +228,7 @@ const ChessboardHero = () => {
     {
       title: "3D Solar System",
       description: "Interactive 3D solar system built with Three.js, featuring realistic planetary movements and stunning visual effects.",
-      url: "https://3d-solar.netlify.app/",
+      url: "https://3d-solar-galaxy.netlify.app/",
       technologies: ["Three.js", "JavaScript", "WebGL", "CSS3"],
       // icon: "♔"
     },
