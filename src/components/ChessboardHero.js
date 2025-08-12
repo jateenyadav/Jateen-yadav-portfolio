@@ -827,7 +827,7 @@ const ChessboardHero = () => {
                 <p>UI/UX design principles, visual design fundamentals, and user-centered design methodologies from the prestigious California Institute of the Arts.</p>
                 <div className="certificate-preview">
                   <div className="certificate-badge">CalArts Certified</div>
-                  <div className="view-certificate">Click to View PDF Certificate</div>
+                  <div className="view-certificate">Click to View Certificate</div>
                 </div>
                 <div className="skills-used">
                   <span className="skill-tag">UI/UX Design</span>
