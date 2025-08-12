@@ -16,7 +16,6 @@ const ChessboardHero = () => {
   const [hoveredSquare, setHoveredSquare] = useState(null);
   const [boardSize, setBoardSize] = useState({ rows: 8, cols: 10 });
   const [smokingSquares, setSmokingSquares] = useState(new Set());
-  const [showCertificate, setShowCertificate] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -159,10 +158,6 @@ const ChessboardHero = () => {
   const getSquareOpacity = (col) => {
     const progress = col / (boardSize.cols - 1);
     return 0.7 + (progress * 0.3);
-  };
-
-  const scrollToContact = () => {
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   };
 
   const openProject = (projectUrl) => {
