@@ -230,28 +230,24 @@ const ChessboardHero = () => {
       description: "Interactive 3D solar system built with Three.js, featuring realistic planetary movements and stunning visual effects.",
       url: "https://3d-solar-galaxy.netlify.app/",
       technologies: ["Three.js", "JavaScript", "WebGL", "CSS3"],
-      // icon: "♔"
     },
     {
       title: "Crypto Dashboard",
       description: "Crypto dashboard featuring real-time data collection and visualization, API integration, and dynamic updates using React.",
       url: "https://lambent-platypus-3a1299.netlify.app/",
       technologies: ["React", "JavaScript", "API Integration"],
-      // icon: "♕"
     },
     {
       title: "Community Platform",
       description: "Coder community platform connecting users with shared interests and real-time messaging features.",
       url: "https://community4you.netlify.app/",
       technologies: ["React", "Firebase", "CSS3", "JavaScript"],
-      // icon: "♖"
     },
     {
       title: "Find a Meal by Ingredients",
       description: "Discover meals by entering ingredients, featuring React, Bootstrap, and API integration with YouTube for cooking videos.",
       url: "https://rainbow-marshmallow-32efec.netlify.app/",
       technologies: ["React", "Bootstrap", "API Integration"],
-      // icon: "♗"
     }
   ];
 
@@ -314,7 +310,7 @@ const ChessboardHero = () => {
                 <span className="chess-piece black-king">♔</span>
               </h1>
               <div className="chess-subtitle">
-                <span className="chess-rank">Frontend Developer</span>
+                <span className="chess-rank">Software Engineer | Frontend & App Developer</span>
               </div>
             </div>
           </div>  
@@ -333,7 +329,7 @@ const ChessboardHero = () => {
             <div className="about-card">
               <div className="about-text">
                 <p>
-                  I'm a passionate <strong>Frontend Developer</strong> with 2+ years of professional experience 
+                  I'm a passionate <strong>Software Engineer</strong> with 2+ years of professional experience 
                   creating interactive, real-time web applications and cross-platform mobile solutions. 
                   Currently working as a <strong>Junior Research Engineer at Hitachi India</strong>, where I 
                   develop cutting-edge dashboards and mobile applications for international clients.
@@ -626,7 +622,7 @@ const ChessboardHero = () => {
             </div>
 
             <div className="skill-category">
-              <h3>Tools & Libraries</h3>
+              <h3>SupportingTools & Libraries</h3>
               <div className="skill-items">
                 <div className="skill-item">
                   <div className="skill-name-container">
@@ -657,7 +653,7 @@ const ChessboardHero = () => {
                 </div>
                 <div className="skill-item">
                   <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-line.svg" alt="Adobe Creative Suite" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-line.svg" alt="Adobe Creative Suite" style={{width: '20px', height: '20px', filter: 'invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(90%) contrast(100%)'}} /></span>
                     <span className="skill-name">Adobe Creative Suite</span>
                   </div>
                   <div className="skill-bar">
@@ -728,7 +724,6 @@ const ChessboardHero = () => {
                 <h3>JavaScript Foundations Professional Certificate</h3>
                 <span className="company">Mozilla</span>
                 <span className="platform">via LinkedIn Learning</span>
-                {/* <span className="duration">Jun 2024</span> */}
               </div>
               <div className="card-content">
                 <p>Advanced JavaScript concepts, modern development patterns, and professional-grade coding practices certified by Mozilla through LinkedIn Learning platform.</p>
@@ -750,7 +745,6 @@ const ChessboardHero = () => {
                 <h3>Introduction to Front-End Development</h3>
                 <span className="company">Meta (Facebook)</span>
                 <span className="platform">via Coursera</span>
-                {/* <span className="duration">Aug 2023</span> */}
               </div>
               <div className="card-content">
                 <p>Comprehensive course covering modern front-end development technologies, React fundamentals, and best practices from Meta's engineering team.</p>
@@ -772,7 +766,6 @@ const ChessboardHero = () => {
                 <h3>JavaScript Essential Training</h3>
                 <span className="company">LinkedIn Learning</span>
                 <span className="platform">Codespaces Integration</span>
-                {/* <span className="duration">May 2024</span> */}
               </div>
               <div className="card-content">
                 <p>Comprehensive JavaScript training covering fundamental concepts, advanced techniques, and practical applications in modern web development.</p>
@@ -794,7 +787,6 @@ const ChessboardHero = () => {
                 <h3>JavaScript Essentials Training</h3>
                 <span className="company">LinkedIn Learning</span>
                 <span className="platform">Codepad Integration</span>
-                {/* <span className="duration">Apr 2024</span> */}
               </div>
               <div className="card-content">
                 <p>JavaScript training focusing on practical coding exercises, problem-solving techniques, and real-world application development.</p>
@@ -816,7 +808,6 @@ const ChessboardHero = () => {
                 <h3>Visual Elements of User Interface Design</h3>
                 <span className="company">California Institute of the Arts</span>
                 <span className="platform">via Coursera</span>
-                {/* <span className="duration">Jul 2021</span> */}
               </div>
               <div className="card-content">
                 <p>UI/UX design principles, visual design fundamentals, and user-centered design methodologies from the prestigious California Institute of the Arts.</p>

@@ -39,6 +39,7 @@
 
 .logo-king {
   font-size: 2.5rem;
+  padding-bottom: 10px;
   animation: pieceGlow 3s ease-in-out infinite alternate;
   color: #ffffff;
 }
