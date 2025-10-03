@@ -14,6 +14,22 @@ const Navigation = () => {
     setIsMenuOpen(false);
   };
 
+  const handleResumeView = () => {
+    // Open resume in new tab for viewing
+    window.open('/Jateen_yadav_resume.pdf', '_blank');
+  };
+
+  const handleResumeDownload = (e) => {
+    e.stopPropagation(); // Prevent the main button click
+    // Create download link
+    const link = document.createElement('a');
+    link.href = '/Jateen_yadav_resume.pdf';
+    link.download = 'Jateen_yadav_resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <nav className="navigation">
       <div className="nav-container">
@@ -31,10 +47,19 @@ const Navigation = () => {
           <a href="#contact" className="nav-link" onClick={() => scrollToSection('contact')}>Contact</a>
         </div>
 
-        <button className="hire-me-btn" onClick={scrollToContact}>
-          <span className="hire-text">Hire Me</span>
-          {/* <span className="hire-icon"></span> */}
-        </button>
+        <div className="nav-actions">
+          <button className="resume-btn" onClick={handleResumeView}>
+            <span className="resume-text">Resume</span>
+            <span className="separator">|</span>
+            <div className="download-icon" onClick={handleResumeDownload} title="Download Resume">
+              <img src="/download (1).png" alt="Download" className="download-img" />
+            </div>
+          </button>
+
+          <button className="hire-me-btn" onClick={scrollToContact}>
+            <span className="hire-text">Hire Me</span>
+          </button>
+        </div>
 
         <div className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <span className="bar"></span>

@@ -74,6 +74,77 @@
   box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
 }
 
+/* Navigation Actions Container */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-self: end;
+}
+
+/* Resume Button */
+.resume-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem 1rem;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resume-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.resume-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.download-icon {
+  cursor: pointer;
+  /* padding: 0.1rem; */
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* min-width: 4px;
+  min-height: 4px; */
+}
+
+.download-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.download-img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1); /* Makes the image white */
+  transition: all 0.3s ease;
+}
+
+.download-icon:hover .download-img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+/* Hire Me Button */
 .hire-me-btn {
   background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
   border: none;
@@ -88,7 +159,6 @@
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
   font-size: 1.1rem;
-  justify-self: end;
 }
 
 .hire-me-btn:hover {
@@ -98,10 +168,6 @@
 
 .hire-text {
   font-weight: 700;
-}
-
-.hire-icon {
-  font-size: 1.8rem;
 }
 
 .nav-toggle {
@@ -117,6 +183,17 @@
   background: #fff;
   margin: 3px 0;
   transition: 0.3s;
+}
+
+@keyframes pieceGlow {
+  0% {
+    text-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.6);
+  }
 }
 
 /* Responsive Design */
@@ -142,6 +219,31 @@
 
   .nav-menu.active {
     left: 0;
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  .resume-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+    gap: 0.6rem;
+  }
+
+  .separator {
+    font-size: 1.1rem;
+  }
+
+  .download-icon {
+    min-width: 22px;
+    min-height: 22px;
+    padding: 0.25rem;
+  }
+
+  .download-img {
+    width: 14px;
+    height: 14px;
   }
 
   .nav-toggle {
@@ -174,6 +276,38 @@
   }
 }
 
+@media screen and (max-width: 480px) {
+  .nav-actions {
+    gap: 0.3rem;
+  }
+
+  .resume-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .separator {
+    font-size: 1rem;
+  }
+
+  .download-icon {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0.2rem;
+  }
+
+  .download-img {
+    width: 12px;
+    height: 12px;
+  }
+
+  .hire-me-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
 @media screen and (max-width: 300px) {
   .nav-container {
     padding: 0 0.5rem;
@@ -184,23 +318,37 @@
     font-size: 1.4rem;
   }
   
-  .hire-me-btn {
-    padding: 0.6rem 1rem;
+  .nav-actions {
+    gap: 0.2rem;
+  }
+  
+  .resume-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    gap: 0.4rem;
+  }
+
+  .separator {
     font-size: 0.9rem;
+  }
+
+  .download-icon {
+    min-width: 18px;
+    min-height: 18px;
+    padding: 0.15rem;
+  }
+
+  .download-img {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .hire-me-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
   }
   
   .nav-toggle {
     transform: scale(0.8);
-  }
-}
-
-@keyframes pieceGlow {
-  0% {
-    text-shadow: 
-      0 0 10px rgba(255, 255, 255, 0.3);
-  }
-  100% {
-    text-shadow: 
-      0 0 20px rgba(255, 255, 255, 0.6);
   }
 }
