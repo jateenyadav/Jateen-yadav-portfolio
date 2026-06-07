@@ -862,9 +862,27 @@ html, body {
 }
 
 .project-icon {
-  font-size: 2.5rem;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  line-height: 1;
   color: #ffffff;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  background: rgba(102, 126, 234, 0.12);
+  border: 1px solid rgba(102, 126, 234, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-icon {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.45);
+  transform: scale(1.05);
 }
 
 .project-header h3 {
@@ -1331,6 +1349,23 @@ html, body {
   font-size: 1.5rem;
 }
 
+.form-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.form-note a {
+  color: #8ea2ff;
+  text-decoration: none;
+}
+
+.form-note a:hover {
+  text-decoration: underline;
+}
+
 /* Footer Styles */
 .footer {
   background: linear-gradient(180deg, 
@@ -1401,14 +1436,15 @@ html, body {
   justify-content: center;
   width: 50px;
   height: 50px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   color: #ccc;
   font-size: 1.5rem;
   text-decoration: none;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
 .social-link:hover {
@@ -1417,12 +1453,12 @@ html, body {
   box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
 
-/* Social Icons Styling */
+/* Social Icons Styling — full-colour brand logos, keep them crisp on the dark hero */
 .social-icon {
   width: 28px;
   height: 28px;
   object-fit: contain;
-  filter: brightness(0.8);
+  filter: brightness(1.05) contrast(1.05);
   transition: all 0.3s ease;
 }
 
@@ -1755,7 +1791,10 @@ html, body {
   }
   
   .project-icon {
-    font-size: 2rem;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    border-radius: 12px;
   }
   
   .project-header h3 {
@@ -2119,5 +2158,466 @@ html {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   LIGHT THEME OVERRIDES  (rewritten screen-by-screen)
+   Dark stays the default. These rules layer on only when
+   <html data-theme="light">. Organised section by section so
+   every "screen" is fully covered: backgrounds, cards, text,
+   labels, tags and icons.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   0. GLOBAL — base palette tokens for light mode
+   --------------------------------------------------------- */
+[data-theme='light'] {
+  --lt-ink: #1a1a2e;       /* primary headings / strong text */
+  --lt-body: #44485a;      /* body copy */
+  --lt-muted: #6a6f82;     /* meta / captions */
+  --lt-faint: #8b90a3;     /* placeholders / faint labels */
+  --lt-card: #ffffff;      /* card surface */
+  --lt-border: rgba(15, 23, 42, 0.08);
+  --lt-accent: #5b6fd6;    /* accent ink */
+  --lt-accent-2: #3a3a8e;
+}
+
+/* ---------------------------------------------------------
+   1. HERO — intentionally stays a dramatic dark showcase in
+   both themes so glowing chess pieces, the name and the
+   subtitle remain legible and on-brand.
+   --------------------------------------------------------- */
+/* ---------------------------------------------------------
+   1. HERO — switches to a bright "marble" chessboard in light
+   mode. The board squares brighten, the name / job-title cards
+   flip to light surfaces with dark ink, and the black king gets
+   a soft outline so it still reads on the lighter board.
+   --------------------------------------------------------- */
+[data-theme='light'] .chessboard-hero {
+  background: linear-gradient(135deg,
+    #dde4f5 0%, #c4cfec 25%, #aab8e2 50%, #c4cfec 75%, #dde4f5 100%);
+}
+
+/* Light marble board: bright white squares + clear slate-blue squares for
+   the same crisp two-tone contrast the dark board has. */
+[data-theme='light'] .chess-square {
+  border: 1px solid rgba(27, 34, 64, 0.08);
+  backdrop-filter: none;
+}
+[data-theme='light'] .chess-square.light {
+  background: linear-gradient(135deg,
+    #ffffff 0%,
+    #f1f4fd 50%,
+    #ffffff 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 0 26px rgba(255, 255, 255, 0.7);
+}
+[data-theme='light'] .chess-square.dark {
+  background: linear-gradient(135deg,
+    #9aa6d0 0%,
+    #7e8cc0 50%,
+    #9aa6d0 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 12px rgba(27, 34, 64, 0.18);
+}
+
+/* Cinematic fade + vignette so the light board has the same depth as dark */
+[data-theme='light'] .chessboard::before {
+  background: linear-gradient(90deg,
+    rgba(27, 34, 64, 0.10) 0%,
+    rgba(27, 34, 64, 0.04) 45%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+}
+
+/* Square labels become dark ink so they stay legible on the marble board */
+[data-theme='light'] .square-content,
+[data-theme='light'] .chess-square.code .square-content,
+[data-theme='light'] .chess-square.icon .square-content,
+[data-theme='light'] .chess-square.tech .square-content {
+  color: #1f2750;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.65);
+}
+[data-theme='light'] .chess-square:hover .square-content,
+[data-theme='light'] .chess-square.code:hover .square-content,
+[data-theme='light'] .chess-square.icon:hover .square-content,
+[data-theme='light'] .chess-square.tech:hover .square-content {
+  color: #11183a;
+  text-shadow: 0 0 18px rgba(102, 126, 234, 0.45);
+}
+
+/* Name card: light glass surface + dark ink */
+[data-theme='light'] .name-text {
+  color: #1b2240;
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(27, 34, 64, 0.18);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  animation: none;
+}
+[data-theme='light'] .name-text::before { opacity: 0.08; }
+
+/* Job-title card */
+[data-theme='light'] .chess-rank {
+  color: #1b2240;
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(27, 34, 64, 0.18);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 32px rgba(31, 41, 84, 0.15);
+}
+
+/* Chess king glyphs in the name: keep contrast on the light board */
+[data-theme='light'] .white-king {
+  color: #ffffff;
+  text-shadow: 0 0 6px rgba(102, 126, 234, 0.6), 0 1px 2px rgba(27, 34, 64, 0.55);
+}
+[data-theme='light'] .black-king {
+  color: #1b2240;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+[data-theme='light'] .chess-piece {
+  animation: none;
+}
+
+/* Hover depth tuned for the bright board (dark theme uses brightness 1.5 which
+   washes out white marble squares). */
+[data-theme='light'] .chess-square:hover {
+  box-shadow:
+    0 50px 100px rgba(27, 34, 64, 0.30),
+    0 0 0 3px rgba(91, 111, 214, 0.45);
+  filter: brightness(1.04) contrast(1.05);
+}
+
+/* ---------------------------------------------------------
+   2. SECTION BACKGROUNDS — ALL content screens go light.
+   The base .chess-section (and its alternating :nth-child(even))
+   define dark gradients, so we must override every screen here,
+   otherwise dark text lands on a dark background (invisible).
+   --------------------------------------------------------- */
+[data-theme='light'] .chess-section,
+[data-theme='light'] .chess-section:nth-child(even),
+[data-theme='light'] .about-section,
+[data-theme='light'] .experience-section,
+[data-theme='light'] .internships-section,
+[data-theme='light'] .skills-section,
+[data-theme='light'] .courses-section,
+[data-theme='light'] .contact-section {
+  background: linear-gradient(180deg, #f6f7fc 0%, #eef1f9 50%, #f6f7fc 100%);
+}
+
+/* Give alternating screens a subtle tint difference for rhythm */
+[data-theme='light'] .experience-section,
+[data-theme='light'] .skills-section {
+  background: linear-gradient(180deg, #eef1f9 0%, #f6f7fc 50%, #eef1f9 100%);
+}
+
+/* Decorative ::before radial overlays are tuned for dark; soften them */
+[data-theme='light'] .about-section::before,
+[data-theme='light'] .internships-section::before,
+[data-theme='light'] .skills-section::before,
+[data-theme='light'] .courses-section::before {
+  opacity: 0.5;
+}
+
+[data-theme='light'] .footer {
+  background: linear-gradient(180deg, #e7eaf5 0%, #eef1f9 100%);
+}
+
+/* ---------------------------------------------------------
+   3. SHARED — section headers, titles and the chess icons
+   --------------------------------------------------------- */
+[data-theme='light'] .section-title {
+  color: var(--lt-ink);
+  text-shadow: none;
+}
+
+[data-theme='light'] .chess-icon {
+  color: var(--lt-accent);
+  text-shadow: none;
+}
+
+/* Any heading that lives inside a content section -> dark ink */
+[data-theme='light'] .section-container h2,
+[data-theme='light'] .section-container h3,
+[data-theme='light'] .section-container h4,
+[data-theme='light'] .section-container h5 {
+  color: var(--lt-ink);
+  text-shadow: none;
+}
+
+/* ---------------------------------------------------------
+   4. CARDS — every card surface becomes white on light
+   --------------------------------------------------------- */
+[data-theme='light'] .about-card,
+[data-theme='light'] .content-card,
+[data-theme='light'] .experience-card,
+[data-theme='light'] .project-card,
+[data-theme='light'] .skill-category {
+  background: var(--lt-card);
+  border: 1px solid var(--lt-border);
+  box-shadow: 0 10px 30px rgba(100, 110, 160, 0.12);
+  backdrop-filter: none;
+}
+
+[data-theme='light'] .education-card {
+  background: linear-gradient(135deg,
+    rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  border: 2px solid rgba(102, 126, 234, 0.25);
+}
+
+/* ---------------------------------------------------------
+   5. ABOUT SCREEN
+   --------------------------------------------------------- */
+[data-theme='light'] .about-text p {
+  color: var(--lt-body);
+}
+[data-theme='light'] .about-text strong {
+  color: var(--lt-ink);
+}
+[data-theme='light'] .stat-number {
+  text-shadow: none;
+}
+[data-theme='light'] .stat-label {
+  color: var(--lt-muted);
+}
+
+/* ---------------------------------------------------------
+   6. EXPERIENCE + INTERNSHIPS SCREENS (content-card)
+   --------------------------------------------------------- */
+[data-theme='light'] .card-header h3,
+[data-theme='light'] .card-content h4,
+[data-theme='light'] .content-card h3,
+[data-theme='light'] .content-card h4 {
+  color: var(--lt-ink);
+  text-shadow: none;
+}
+[data-theme='light'] .card-content p,
+[data-theme='light'] .content-card p,
+[data-theme='light'] .content-card li {
+  color: var(--lt-body);
+}
+[data-theme='light'] .content-card strong {
+  color: var(--lt-ink);
+}
+[data-theme='light'] .company,
+[data-theme='light'] .institution,
+[data-theme='light'] .platform,
+[data-theme='light'] .duration {
+  color: var(--lt-muted);
+}
+
+/* skill-tag pills used in experience/internships/certs */
+[data-theme='light'] .skill-tag {
+  background: rgba(102, 126, 234, 0.12);
+  color: var(--lt-accent-2);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+/* ---------------------------------------------------------
+   7. PROJECTS SCREEN
+   --------------------------------------------------------- */
+[data-theme='light'] .project-header h3 {
+  color: var(--lt-ink);
+  text-shadow: none;
+}
+[data-theme='light'] .project-content p {
+  color: var(--lt-body);
+}
+[data-theme='light'] .project-icon {
+  text-shadow: none;
+  background: rgba(102, 126, 234, 0.1);
+  border-color: rgba(102, 126, 234, 0.22);
+}
+[data-theme='light'] .project-link span {
+  color: var(--lt-accent-2);
+}
+[data-theme='light'] .tech-tag {
+  background: rgba(102, 126, 234, 0.12);
+  color: var(--lt-accent-2);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* ---------------------------------------------------------
+   8. SKILLS SCREEN
+   --------------------------------------------------------- */
+[data-theme='light'] .skill-category h3 {
+  color: var(--lt-ink);
+  text-shadow: none;
+}
+[data-theme='light'] .skill-name {
+  color: var(--lt-body);
+}
+[data-theme='light'] .skill-bar {
+  background: rgba(15, 23, 42, 0.08);
+}
+/* Devicon SVGs that were inverted to white for the dark theme need
+   their invert removed on light so they show their real colours.
+   (Icons relying on currentColor get the accent instead.) */
+[data-theme='light'] .skill-icon img[style*="invert"] {
+  filter: none !important;
+}
+
+/* ---------------------------------------------------------
+   9. EDUCATION & CERTIFICATIONS SCREEN
+   --------------------------------------------------------- */
+[data-theme='light'] .highlight-label {
+  color: var(--lt-muted);
+}
+[data-theme='light'] .highlight-value {
+  color: var(--lt-ink);
+}
+[data-theme='light'] .certificate-preview {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.1);
+}
+[data-theme='light'] .view-certificate {
+  color: var(--lt-accent-2);
+}
+
+/* ---------------------------------------------------------
+   10. CONTACT SCREEN
+   --------------------------------------------------------- */
+[data-theme='light'] .project-interests h4 {
+  color: var(--lt-ink);
+}
+[data-theme='light'] .form-input,
+[data-theme='light'] .form-textarea {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  color: var(--lt-ink);
+}
+[data-theme='light'] .form-input::placeholder,
+[data-theme='light'] .form-textarea::placeholder {
+  color: var(--lt-faint);
+}
+[data-theme='light'] .interest-option {
+  color: var(--lt-body);
+}
+[data-theme='light'] .interest-option:hover {
+  background: rgba(102, 126, 234, 0.08);
+  color: var(--lt-ink);
+}
+[data-theme='light'] .form-note {
+  color: var(--lt-muted);
+}
+[data-theme='light'] .form-note a {
+  color: var(--lt-accent);
+}
+
+/* ---------------------------------------------------------
+   11. FOOTER SCREEN
+   --------------------------------------------------------- */
+[data-theme='light'] .footer-credit,
+[data-theme='light'] .footer-credit span {
+  color: var(--lt-muted);
+}
+/* The brand icon PNGs are full-COLOR logos (black GitHub, blue LinkedIn,
+   green WhatsApp, etc.). In light mode we give each chip a clean white/marble
+   surface so every logo — including the dark GitHub mark — stays crisp and
+   fully visible on the light page background. */
+[data-theme='light'] .social-link {
+  color: #1f2440;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+}
+[data-theme='light'] .social-link:hover {
+  color: #ffffff;
+  box-shadow: 0 10px 26px rgba(102, 126, 234, 0.28);
+}
+[data-theme='light'] .social-icon {
+  filter: brightness(1) contrast(1.05);
+}
+[data-theme='light'] .social-link:hover .social-icon {
+  filter: brightness(1.1) contrast(1.1);
+}
+
+/* ---------------------------------------------------------
+   12. SELECTION
+   --------------------------------------------------------- */
+[data-theme='light'] ::selection {
+  background: rgba(102, 126, 234, 0.25);
+  color: var(--lt-ink);
+}
+
+/* ---------------------------------------------------------
+   13. SAFETY NET — any remaining hardcoded white/grey text
+   inside content screens falls back to readable ink. Scoped
+   to content sections only so the dark hero is never touched.
+   --------------------------------------------------------- */
+[data-theme='light'] .chess-section p,
+[data-theme='light'] .chess-section li,
+[data-theme='light'] .chess-section span:not(.skill-tag):not(.tech-tag):not(.chess-icon):not(.stat-number) {
+  color: var(--lt-body);
+}
+[data-theme='light'] .chess-section strong {
+  color: var(--lt-ink);
+}
+
+/* =========================================================
+   SCROLL-TO-TOP BUTTON
+   ========================================================= */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 12px 28px rgba(102, 126, 234, 0.5);
+}
+
+.scroll-top-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top-btn {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transform: none;
+  }
+  .scroll-top-btn.visible {
+    transform: none;
+  }
+  .scroll-top-btn:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .scroll-top-btn {
+    bottom: 18px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
   }
 }

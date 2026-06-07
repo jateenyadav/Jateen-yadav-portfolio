@@ -23,8 +23,13 @@ const ChessboardHero = () => {
     message: '',
     interests: []
   });
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const heroRef = useRef(null);
   const experienceRef = useRef(null);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const updateBoardSize = () => {
@@ -59,6 +64,8 @@ const ChessboardHero = () => {
         }
         setSmokingSquares(newSmokingSquares);
       }
+
+      setShowScrollTop(scrollPosition > 600);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -227,24 +234,28 @@ const ChessboardHero = () => {
   const projects = [
     {
       title: "3D Solar System",
+      icon: "🪐",
       description: "Interactive 3D solar system built with Three.js, featuring realistic planetary movements and stunning visual effects.",
       url: "https://3d-solar-galaxy.netlify.app/",
       technologies: ["Three.js", "JavaScript", "WebGL", "CSS3"],
     },
     {
       title: "Crypto Dashboard",
+      icon: "📈",
       description: "Crypto dashboard featuring real-time data collection and visualization, API integration, and dynamic updates using React.",
       url: "https://lambent-platypus-3a1299.netlify.app/",
       technologies: ["React", "JavaScript", "API Integration"],
     },
     {
       title: "Community Platform",
+      icon: "💬",
       description: "Coder community platform connecting users with shared interests and real-time messaging features.",
       url: "https://community4you.netlify.app/",
       technologies: ["React", "Firebase", "CSS3", "JavaScript"],
     },
     {
       title: "Find a Meal by Ingredients",
+      icon: "🍳",
       description: "Discover meals by entering ingredients, featuring React, Bootstrap, and API integration with YouTube for cooking videos.",
       url: "https://rainbow-marshmallow-32efec.netlify.app/",
       technologies: ["React", "Bootstrap", "API Integration"],
@@ -310,7 +321,7 @@ const ChessboardHero = () => {
                 <span className="chess-piece black-king">♔</span>
               </h1>
               <div className="chess-subtitle">
-                <span className="chess-rank">Software Engineer | Frontend & App Developer</span>
+                <span className="chess-rank">Full Stack Developer | MERN &amp; Cross-Platform Apps</span>
               </div>
             </div>
           </div>  
@@ -329,39 +340,40 @@ const ChessboardHero = () => {
             <div className="about-card">
               <div className="about-text">
                 <p>
-                  I'm a passionate <strong>Software Engineer</strong> with 2+ years of professional experience 
-                  creating interactive, real-time web applications and cross-platform mobile solutions. 
-                  Currently working as a <strong>Junior Research Engineer at Hitachi India</strong>, where I 
-                  develop cutting-edge dashboards and mobile applications for international clients.
+                  I'm a <strong>Full Stack Developer</strong> with around 3 years of professional experience
+                  building React.js and Node.js applications for enterprise clients. Currently working as a
+                  <strong> Full Stack Developer (Junior Research Engineer) at Hitachi India</strong>, where I
+                  ship production dashboards, real-time data systems, and cross-platform apps across web,
+                  mobile, and desktop.
                 </p>
                 <p>
-                  My expertise lies in transforming complex business requirements into elegant, user-friendly 
-                  interfaces using <strong>React.js, JavaScript, Flutter, and modern web technologies</strong>. 
-                  I specialize in data visualization, real-time dashboard development, and cross-platform 
-                  mobile applications that drive business insights and improve user experience.
+                  My core stack is the <strong>MERN ecosystem (MongoDB, Express, React, Node)</strong> alongside
+                  Next.js, TypeScript, and Flutter. I focus on REST/GraphQL API development, performance
+                  optimization, and unit testing with Jest &amp; React Testing Library — turning
+                  complex business requirements into fast, reliable, production-grade software.
                 </p>
                 <p>
-                  Beyond technical skills, I bring leadership experience as the Vice-President of Youth Red Cross 
-                  Society, where I led community health initiatives and blood donation campaigns. I believe in 
-                  using technology to create meaningful impact and deliver solutions that solve real-world problems.
+                  I've worked on real-time industrial dashboards handling 10,000+ concurrent data points
+                  and cut UI response times by 35% through Redux refactors. I care about measurable impact
+                  and shipping clean, maintainable code.
                 </p>
               </div>
               <div className="about-stats">
                 <div className="stat-item">
-                  <span className="stat-number">2+</span>
+                  <span className="stat-number">3</span>
                   <span className="stat-label">Years Experience</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">20+</span>
-                  <span className="stat-label">Projects Delivered</span>
+                  <span className="stat-number">4+</span>
+                  <span className="stat-label">Enterprise Dashboards</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">8</span>
-                  <span className="stat-label">Core Technologies</span>
+                  <span className="stat-number">10k+</span>
+                  <span className="stat-label">Concurrent Data Points</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">100%</span>
-                  <span className="stat-label">Client Satisfaction</span>
+                  <span className="stat-number">5</span>
+                  <span className="stat-label">Internships</span>
                 </div>
               </div>
             </div>
@@ -380,26 +392,28 @@ const ChessboardHero = () => {
           <div className="content-grid">
             <div className="content-card">
               <div className="card-header">
-                <h3>Junior Research Engineer</h3>
-                <span className="company">Hitachi India Pvt. Ltd.</span>
-                <span className="duration">Sept 2023 – Present</span>
+                <h3>Full Stack Developer (Junior Research Engineer)</h3>
+                <span className="company">Hitachi India Pvt. Ltd. (via Randstad)</span>
+                <span className="duration">Sep 2023 – Present</span>
               </div>
               <div className="card-content">
-                <h4>Web Development</h4>
-                <p>Designed and delivered interactive, real-time data visualisation React dashboards for overseas clients, driving key business insights and decision-making. Enhanced dashboard performance using modern JavaScript libraries and optimized rendering techniques.</p>
-                <h4>Mobile Development</h4>
-                <p>Engineered cross-platform mobile dashboards using Flutter and Dart. Integrated Firebase for robust authentication, cloud data storage, and real-time synchronization across multiple devices.</p>
+                <h4>Full Stack &amp; Web</h4>
+                <p>Architected and shipped 4+ full-stack dashboards in React.js and Node.js/Express.js for 3 enterprise clients, loading real-time industrial data in under 2 seconds. Built MERN applications handling 10,000+ concurrent data points; a Redux state refactor cut redundant API calls and improved UI response time by 35%.</p>
+                <h4>Mobile &amp; Desktop</h4>
+                <p>Built Flutter/Dart mobile apps consuming REST APIs with pixel-exact designs across Android and iOS, and packaged React projects as Android APKs via Apache Cordova. Developed 2 Electron desktop apps (Windows + macOS) with automated build scripts that reduced manual build-to-deploy time by 50%.</p>
+                <h4>Backend &amp; Data</h4>
+                <p>Built Node.js/Express.js services with MongoDB, Firebase Auth, and real-time Firestore sync, maintaining 99%+ data consistency across concurrent client sessions.</p>
                 <div className="skills-used">
-                <span className="skill-tag">Web Development</span>
-                <span className="skill-tag">Android Development & Deployment</span>
-                <span className="skill-tag">iOS Development & Deployment</span>
-                  <span className="skill-tag">ReactJS</span>
+                  <span className="skill-tag">React.js</span>
+                  <span className="skill-tag">Node.js</span>
+                  <span className="skill-tag">Express.js</span>
+                  <span className="skill-tag">MongoDB</span>
+                  <span className="skill-tag">Redux</span>
                   <span className="skill-tag">Flutter</span>
-                  <span className="skill-tag">JavaScript</span>
-                  <span className="skill-tag">Redux.js</span>
-                  <span className="skill-tag">Dart</span>
+                  <span className="skill-tag">Electron</span>
                   <span className="skill-tag">Firebase</span>
-                  <span className="skill-tag">Three.js</span>
+                  <span className="skill-tag">Cordova</span>
+                  <span className="skill-tag">AWS</span>
                 </div>
               </div>
             </div>
@@ -418,18 +432,18 @@ const ChessboardHero = () => {
           <div className="content-grid">
             <div className="content-card">
               <div className="card-header">
-                <h3>Research & Development Intern</h3>
+                <h3>Software Engineering Intern</h3>
                 <span className="company">Hitachi India Pvt. Ltd.</span>
                 <span className="duration">Feb 2023 – May 2023</span>
               </div>
               <div className="card-content">
-                <p>Developed a comprehensive React dashboard to visualize real-time machine status on assembly lines. Engineered multi-layered data visualizations using Chart.js, Fusion Charts, and Plotly JS, improving operational efficiency by 35%.</p>
+                <p>Built a real-time machine monitoring dashboard (React.js + Redux) tracking 5+ production lines, removing manual data entry and cutting reporting delays by 40%. Rewrote Redux state logic and batched API calls, combined with Chart.js/Plotly.js rendering improvements, dropping dashboard load time by 30%.</p>
                 <div className="skills-used">
-                  <span className="skill-tag">JavaScript</span>
-                  <span className="skill-tag">React</span>
+                  <span className="skill-tag">React.js</span>
                   <span className="skill-tag">Redux</span>
                   <span className="skill-tag">Chart.js</span>
-                  <span className="skill-tag">Bootstrap</span>
+                  <span className="skill-tag">Plotly.js</span>
+                  <span className="skill-tag">JavaScript</span>
                 </div>
               </div>
             </div>
@@ -437,50 +451,50 @@ const ChessboardHero = () => {
             <div className="content-card">
               <div className="card-header">
                 <h3>Frontend Engineering Intern</h3>
-                <span className="company">Acadlift.com</span>
+                <span className="company">Acadlift.com (Igni eCommerce Pvt. Ltd.)</span>
                 <span className="duration">Jun 2022 – Jul 2022</span>
               </div>
               <div className="card-content">
-                <p>Built and integrated reusable React components to enhance scalability and maintainability of client-facing web applications. Improved code reusability by 40% and received recognition for proactive problem-solving approach.</p>
+                <p>Built a React.js component library of 15+ components with REST API hooks, cutting code duplication by 40% across 3 parallel development streams. Shipped 4 frontend modules across agile sprints in a team of 6; standardized components cut release time by 20% per cycle.</p>
                 <div className="skills-used">
-                  <span className="skill-tag">ReactJS</span>
+                  <span className="skill-tag">React.js</span>
+                  <span className="skill-tag">REST APIs</span>
                   <span className="skill-tag">JavaScript</span>
-                  <span className="skill-tag">HTML5</span>
-                  <span className="skill-tag">CSS3</span>
+                  <span className="skill-tag">Agile</span>
                 </div>
               </div>
             </div>
 
             <div className="content-card">
               <div className="card-header">
-                <h3>Frontend Development & Analytics Intern</h3>
+                <h3>Frontend Development &amp; Analytics Intern</h3>
                 <span className="company">GoPerspective Technologies LLP</span>
                 <span className="duration">Sep 2021 – Oct 2021</span>
               </div>
               <div className="card-content">
-                <p>Collaborated with ML and Analytics team to transform complex datasets into actionable visualizations. Built prototype UI components to represent data insights, improving data interpretation efficiency.</p>
+                <p>Built analytics dashboards that pulled ML model outputs via REST APIs, saving 3 stakeholder teams 50% of their weekly manual reporting time. Cleaned 50,000+ row datasets in Python and designed UI prototypes that let non-technical users read model results without assistance.</p>
                 <div className="skills-used">
                   <span className="skill-tag">Python</span>
+                  <span className="skill-tag">REST APIs</span>
                   <span className="skill-tag">Data Visualization</span>
-                  <span className="skill-tag">Analytics</span>
-                  <span className="skill-tag">UI/UX</span>
+                  <span className="skill-tag">UI Prototyping</span>
                 </div>
               </div>
             </div>
 
             <div className="content-card">
               <div className="card-header">
-                <h3>UI/UX Design Intern</h3>
-                <span className="company">iSchoolConnect Technologies</span>
+                <h3>Design &amp; Analytics Intern</h3>
+                <span className="company">iSchoolConnect Technologies Pvt. Ltd.</span>
                 <span className="duration">Apr 2021 – May 2021</span>
               </div>
               <div className="card-content">
-                <p>Designed schematic UI layouts for annual fest and workshop portal. Led logo development for multiple regional teams, ensuring cohesive branding across 5+ portals and improving brand recognition.</p>
+                <p>Designed UI layouts for 5+ event portals, standardizing component structure and cutting design revision rounds per release from 4 to 2. Produced 20+ assets (banners, social graphics, landing graphics) for 3 product launches across digital channels.</p>
                 <div className="skills-used">
                   <span className="skill-tag">UI Design</span>
-                  <span className="skill-tag">Logo Design</span>
                   <span className="skill-tag">Adobe Creative Suite</span>
                   <span className="skill-tag">Branding</span>
+                  <span className="skill-tag">Visual Design</span>
                 </div>
               </div>
             </div>
@@ -529,39 +543,12 @@ const ChessboardHero = () => {
           
           <div className="skills-container">
             <div className="skill-category">
-              <h3>Frontend Technologies</h3>
+              <h3>Frontend</h3>
               <div className="skill-items">
                 <div className="skill-item">
                   <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="ReactJS" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">ReactJS</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '90%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">JavaScript</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '90%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">HTML5</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '99%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">CSS3</span>
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">React.js</span>
                   </div>
                   <div className="skill-bar">
                     <div className="skill-progress" style={{width: '95%'}}></div>
@@ -569,11 +556,29 @@ const ChessboardHero = () => {
                 </div>
                 <div className="skill-item">
                   <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" alt="Three.js" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">Three.js</span>
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" style={{width: '20px', height: '20px', filter: 'invert(1)'}} /></span>
+                    <span className="skill-name">Next.js</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '75%'}}></div>
+                    <div className="skill-progress" style={{width: '85%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">TypeScript</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '85%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">JavaScript (ES6+)</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '95%'}}></div>
                   </div>
                 </div>
                 <div className="skill-item">
@@ -582,91 +587,7 @@ const ChessboardHero = () => {
                     <span className="skill-name">Redux</span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '95%'}}></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="skill-category">
-              <h3>Mobile & Backend</h3>
-              <div className="skill-items">
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">Flutter</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '85%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">Dart</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '80%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">Firebase</span>
-                  </div>
-                  <div className="skill-bar">
                     <div className="skill-progress" style={{width: '90%'}}></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="skill-category">
-              <h3>SupportingTools & Libraries</h3>
-              <div className="skill-items">
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">Bootstrap</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '95%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chartjs/chartjs-original.svg" alt="Chart.js" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">Chart.js</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '88%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" style={{width: '20px', height: '20px'}} /></span>
-                    <span className="skill-name">Git</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '90%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-line.svg" alt="Adobe Creative Suite" style={{width: '20px', height: '20px', filter: 'invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(90%) contrast(100%)'}} /></span>
-                    <span className="skill-name">Adobe Creative Suite</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '62%'}}></div>
-                  </div>
-                </div>
-                <div className="skill-item">
-                  <div className="skill-name-container">
-                    <span className="skill-icon">CD</span>
-                    <span className="skill-name">Cordova</span>
-                  </div>
-                  <div className="skill-bar">
-                    <div className="skill-progress" style={{width: '80%'}}></div>
                   </div>
                 </div>
                 <div className="skill-item">
@@ -675,7 +596,127 @@ const ChessboardHero = () => {
                     <span className="skill-name">Tailwind CSS</span>
                   </div>
                   <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '90%'}}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="skill-category">
+              <h3>Backend &amp; Database</h3>
+              <div className="skill-items">
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">Node.js</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '90%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express.js" style={{width: '20px', height: '20px', filter: 'invert(1)'}} /></span>
+                    <span className="skill-name">Express.js</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '88%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">MongoDB</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '88%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">GraphQL</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '78%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">Firebase</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '88%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">REST APIs &amp; SQL</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '85%'}}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="skill-category">
+              <h3>Mobile &amp; Testing</h3>
+              <div className="skill-items">
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">Flutter / Dart</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '85%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">Jest / RTL</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '85%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">Docker (basics)</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '60%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">AWS (basics)</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '60%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">Git / GitHub</span>
+                  </div>
+                  <div className="skill-bar">
                     <div className="skill-progress" style={{width: '92%'}}></div>
+                  </div>
+                </div>
+                <div className="skill-item">
+                  <div className="skill-name-container">
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-name">Python</span>
+                  </div>
+                  <div className="skill-bar">
+                    <div className="skill-progress" style={{width: '75%'}}></div>
                   </div>
                 </div>
               </div>
@@ -901,6 +942,7 @@ const ChessboardHero = () => {
                 <button type="submit" className="submit-button">
                   <span>Send Message</span>
                 </button>
+                <p className="form-note">This opens your email app with the message pre-filled. Prefer direct? Reach me at <a href="mailto:jateen.yadav1@gmail.com">jateen.yadav1@gmail.com</a>.</p>
               </form>
             </div>
           </div>
@@ -943,6 +985,15 @@ const ChessboardHero = () => {
           </div>
         </div>
       </footer>
+
+      <button
+        className={`scroll-top-btn ${showScrollTop ? 'visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label="Scroll back to top"
+        title="Back to top"
+      >
+        <span aria-hidden="true">↑</span>
+      </button>
     </div>
   );
 };

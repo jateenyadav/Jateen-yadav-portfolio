@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './Navigation.css';
+import { useTheme } from '../context/ThemeContext';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const scrollToContact = () => {
     document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
@@ -24,7 +26,7 @@ const Navigation = () => {
     // Create download link
     const link = document.createElement('a');
     link.href = '/Jateen_yadav_resume.pdf';
-    link.download = 'Jateen_yadav_resume.pdf';
+    link.download = 'Jateen_Yadav_FullStack_Developer_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -48,6 +50,26 @@ const Navigation = () => {
         </div>
 
         <div className="nav-actions">
+          <button
+            className={`theme-toggle ${theme}`}
+            onClick={toggleTheme}
+            role="switch"
+            aria-checked={theme === 'light'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <span className="theme-toggle-track" aria-hidden="true">
+              <span className="theme-toggle-half theme-toggle-half--dark"></span>
+              <span className="theme-toggle-half theme-toggle-half--light"></span>
+              <span className="theme-toggle-thumb">
+                <span className="theme-toggle-queen">♛</span>
+              </span>
+            </span>
+            <span className="theme-toggle-label">
+              {theme === 'dark' ? 'Dark' : 'Light'}
+            </span>
+          </button>
+
           <button className="resume-btn" onClick={handleResumeView}>
             <span className="resume-text">Resume</span>
             <span className="separator">|</span>
