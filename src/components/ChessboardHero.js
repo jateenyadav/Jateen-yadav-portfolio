@@ -234,28 +234,32 @@ const ChessboardHero = () => {
   const projects = [
     {
       title: "3D Solar System",
-      icon: "🪐",
+      icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='35' fill='%23FFD700'/><circle cx='50' cy='50' r='25' fill='%23FFA500'/><circle cx='50' cy='50' r='15' fill='%23FF8C00'/></svg>",
+      fallbackIcon: "🪐",
       description: "Interactive 3D solar system built with Three.js, featuring realistic planetary movements and stunning visual effects.",
       url: "https://3d-solar-galaxy.netlify.app/",
       technologies: ["Three.js", "JavaScript", "WebGL", "CSS3"],
     },
     {
       title: "Crypto Dashboard",
-      icon: "📈",
+      icon: "https://crypchecker.netlify.app/coin.svg",
+      fallbackIcon: "📈",
       description: "Crypto dashboard featuring real-time data collection and visualization, API integration, and dynamic updates using React.",
       url: "https://crypchecker.netlify.app/",
       technologies: ["React", "JavaScript", "API Integration"],
     },
     {
       title: "Community Platform",
-      icon: "💬",
+      icon: "https://community4you.netlify.app/community.png",
+      fallbackIcon: "💬",
       description: "Coder community platform connecting users with shared interests and real-time messaging features.",
       url: "https://community4you.netlify.app/",
       technologies: ["React", "Firebase", "CSS3", "JavaScript"],
     },
     {
       title: "Find a Meal by Ingredients",
-      icon: "🍳",
+      icon: "https://rainbow-marshmallow-32efec.netlify.app/burger.png",
+      fallbackIcon: "🍳",
       description: "Discover meals by entering ingredients, featuring React, Bootstrap, and API integration with YouTube for cooking videos.",
       url: "https://rainbow-marshmallow-32efec.netlify.app/",
       technologies: ["React", "Bootstrap", "API Integration"],
@@ -516,7 +520,22 @@ const ChessboardHero = () => {
               {projects.map((project, index) => (
                 <div key={index} className="project-card" onClick={() => openProject(project.url)}>
                   <div className="project-header">
-                    <div className="project-icon">{project.icon}</div>
+                    <div className="project-icon">
+                      <img
+                        src={project.icon}
+                        alt={`${project.title} icon`}
+                        className="project-favicon"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          if (e.target.nextSibling) {
+                            e.target.nextSibling.style.display = 'inline';
+                          }
+                        }}
+                      />
+                      <span className="project-favicon-fallback" style={{ display: 'none' }}>
+                        {project.fallbackIcon}
+                      </span>
+                    </div>
                     <h3>{project.title}</h3>
                   </div>
                   <div className="project-content">
