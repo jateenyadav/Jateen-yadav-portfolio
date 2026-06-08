@@ -243,7 +243,7 @@ const ChessboardHero = () => {
       title: "Crypto Dashboard",
       icon: "📈",
       description: "Crypto dashboard featuring real-time data collection and visualization, API integration, and dynamic updates using React.",
-      url: "https://lambent-platypus-3a1299.netlify.app/",
+      url: "https://crypchecker.netlify.app/",
       technologies: ["React", "JavaScript", "API Integration"],
     },
     {
