@@ -258,11 +258,11 @@ const ChessboardHero = () => {
     },
     {
       title: "Find a Meal by Ingredients",
-      icon: "https://rainbow-marshmallow-32efec.netlify.app/burger.png",
+      icon: "https://find-my-meal.netlify.app/burger.png",
       fallbackIcon: "🍳",
-      description: "Discover meals by entering ingredients, featuring React, Bootstrap, and API integration with YouTube for cooking videos.",
-      url: "https://rainbow-marshmallow-32efec.netlify.app/",
-      technologies: ["React", "Bootstrap", "API Integration"],
+      description: "Full-stack recipe explorer powered by TheMealDB. Search by name or ingredient, save favorites via a REST API, scale servings, and switch dark mode.",
+      url: "https://find-my-meal.netlify.app/",
+      technologies: ["Vanilla JS", "Express", "Node.js", "TheMealDB API"],
     }
   ];
 
