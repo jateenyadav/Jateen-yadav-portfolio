@@ -2,73 +2,58 @@ import { useEffect, useRef } from 'react'
 import { gsap, isFinePointer } from '../lib/motion'
 
 /**
- * Two-part cursor (dot + trailing ring) using mix-blend-mode: difference.
- * Elements with data-cursor="Label" grow the ring and show the label;
- * other links/buttons get a medium ring.
+ * Registration-mark crosshair with live pixel coordinates.
+ * Elements with data-cursor="Label" swap the coordinates for a label.
  */
 export default function Cursor() {
-  const dot = useRef<HTMLDivElement>(null)
-  const ring = useRef<HTMLDivElement>(null)
+  const root = useRef<HTMLDivElement>(null)
   const label = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    if (!isFinePointer() || !dot.current || !ring.current) return
-    const dx = gsap.quickTo(dot.current, 'x', { duration: 0.12, ease: 'power3.out' })
-    const dy = gsap.quickTo(dot.current, 'y', { duration: 0.12, ease: 'power3.out' })
-    const rx = gsap.quickTo(ring.current, 'x', { duration: 0.5, ease: 'power3.out' })
-    const ry = gsap.quickTo(ring.current, 'y', { duration: 0.5, ease: 'power3.out' })
+    const el = root.current
+    if (!el || !isFinePointer()) return
+    document.documentElement.classList.add('has-cursor')
+    const xTo = gsap.quickTo(el, 'x', { duration: 0.18, ease: 'power3.out' })
+    const yTo = gsap.quickTo(el, 'y', { duration: 0.18, ease: 'power3.out' })
+    let hoverLabel = ''
 
     const move = (e: PointerEvent) => {
-      dx(e.clientX)
-      dy(e.clientY)
-      rx(e.clientX)
-      ry(e.clientY)
-    }
-
-    const over = (e: PointerEvent) => {
-      const el = e.target as HTMLElement | null
-      const labelled = el?.closest<HTMLElement>('[data-cursor]')
-      const link = el?.closest('a, button')
-      const r = ring.current!
-      if (labelled) {
-        r.classList.add('is-hover')
-        r.classList.remove('is-link')
-        if (label.current) label.current.textContent = labelled.dataset.cursor ?? ''
-      } else if (link) {
-        r.classList.add('is-link')
-        r.classList.remove('is-hover')
-      } else {
-        r.classList.remove('is-hover', 'is-link')
+      xTo(e.clientX)
+      yTo(e.clientY)
+      if (label.current && !hoverLabel) {
+        label.current.textContent = `x ${String(Math.round(e.clientX)).padStart(4, '0')} · y ${String(Math.round(e.clientY)).padStart(4, '0')}`
       }
     }
-
-    const down = () => gsap.to(ring.current, { scale: 0.85, duration: 0.2 })
-    const up = () => gsap.to(ring.current, { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.4)' })
-    const leave = () => gsap.to([dot.current, ring.current], { opacity: 0, duration: 0.3 })
-    const enter = () => gsap.to([dot.current, ring.current], { opacity: 1, duration: 0.3 })
+    const over = (e: PointerEvent) => {
+      const t = e.target as HTMLElement | null
+      const labelled = t?.closest<HTMLElement>('[data-cursor]')
+      const link = t?.closest('a, button')
+      hoverLabel = labelled?.dataset.cursor ?? (link ? 'Click' : '')
+      el.classList.toggle('is-hover', Boolean(hoverLabel))
+      if (hoverLabel && label.current) label.current.textContent = `[ ${hoverLabel} ]`
+    }
+    const leave = () => gsap.to(el, { opacity: 0, duration: 0.2 })
+    const enter = () => gsap.to(el, { opacity: 1, duration: 0.2 })
 
     window.addEventListener('pointermove', move, { passive: true })
     window.addEventListener('pointerover', over, { passive: true })
-    window.addEventListener('pointerdown', down)
-    window.addEventListener('pointerup', up)
     document.documentElement.addEventListener('pointerleave', leave)
     document.documentElement.addEventListener('pointerenter', enter)
     return () => {
+      document.documentElement.classList.remove('has-cursor')
       window.removeEventListener('pointermove', move)
       window.removeEventListener('pointerover', over)
-      window.removeEventListener('pointerdown', down)
-      window.removeEventListener('pointerup', up)
       document.documentElement.removeEventListener('pointerleave', leave)
       document.documentElement.removeEventListener('pointerenter', enter)
     }
   }, [])
 
   return (
-    <>
-      <div ref={dot} className="cursor" aria-hidden="true" />
-      <div ref={ring} className="cursor-ring" aria-hidden="true">
-        <span ref={label} className="cursor-ring__label" />
-      </div>
-    </>
+    <div ref={root} className="xhair" aria-hidden="true">
+      <span className="xhair__h" />
+      <span className="xhair__v" />
+      <span className="xhair__ring" />
+      <span ref={label} className="xhair__label mono" />
+    </div>
   )
 }

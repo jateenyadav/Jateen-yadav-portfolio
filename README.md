@@ -1,22 +1,31 @@
-# Jateen Yadav — Portfolio v2
+# JY-2026 — Jateen, assembled.
 
-Personal portfolio of **Jateen Yadav**, Full Stack · Flutter · AI/LLM engineer.
+Portfolio of **Jateen Yadav** — Full Stack · Flutter · AI/LLM engineer.
 Live: [jateenyadav.netlify.app](https://jateenyadav.netlify.app)
 
-## What's inside
+The site is an **assembly line** (a nod to the real-time factory dashboards I build at Hitachi) crossed with a **print shop**. Every section is a station on the line; a unit travels down the conveyor rail as you scroll.
 
-| Piece | How it works |
+| Station | What happens |
 |---|---|
-| **Morphing particle field** | ~16k GPU particles (Three.js + custom GLSL). Each particle stores four target shapes — sphere, torus knot, DNA helix, wave terrain — and the vertex shader blends between them with a per-particle stagger as you scroll. Cursor repulsion happens in world space. |
-| **Smooth scroll + scroll choreography** | Lenis driven by GSAP's ticker, so ScrollTrigger and the scroll share one clock. Pinned horizontal project gallery, scrubbed word-by-word statement, timeline rail fill. |
-| **Kinetic type** | GSAP SplitText with line masks for the hero, headings and contact. |
-| **Micro-interactions** | Magnetic buttons, blend-mode cursor with contextual labels, text-roll links, accent-flood capability rows. |
-| **Performance** | Three.js is lazy-loaded after first paint (main bundle ≈130 kB gzip), DPR capped at 1.75, fewer particles on small or low-core devices, render loop pauses in hidden tabs. |
-| **Accessibility** | Respects `prefers-reduced-motion` (no smooth scroll, static field, content shown immediately), semantic landmarks, visible focus rings, keyboard-operable capability list. |
+| **00 · Print head** | My photo is sampled into a grid and printed row by row as halftone ink dots (Canvas 2D). Every dot is also one character of my real source code from GitHub — the loupe under your cursor magnifies the dots into that code and names the file + line it's reading. |
+| **01 · Spec sheet** | A machine spec plate, a statement that inks in word by word, stepped counters. |
+| **02 · Modules** | Control-panel rows — hover a module to run it and its log types out. |
+| **03 · Units shipped** | Each project gets a QA shipping label with a generated barcode and a stamp; screenshots print in line by line. |
+| **04 · Service log** | Experience on continuous-feed green-bar printer paper, tractor holes and all. |
+| **05 · Dispatch** | A thermal receipt prints out of a slot: 1 × full-stack engineer, ship to your team. |
+
+## How the portrait works
+
+1. `public/portrait.jpg` is drawn onto an off-screen canvas at grid resolution (84×84 desktop, 66×66 mobile).
+2. Luminance → ink coverage with a contrast stretch and an unsharp mask, so eyes, brows and beard carry the likeness.
+3. Each cell becomes a dot whose radius ∝ √coverage; rows are printed progressively behind an animated print head.
+4. `src/data/code.ts` holds ~17.5k characters pulled from my public repos (`Me-Assistant`, `Exam-AI`). Cell *i* maps to character *i*, so the loupe shows real, readable code and resolves the exact file + line.
 
 ## Stack
 
-React 19 · TypeScript · Vite · Three.js · GSAP (ScrollTrigger, SplitText) · Lenis
+React 19 · TypeScript · Vite · Canvas 2D · GSAP (ScrollTrigger, SplitText) · Lenis. No WebGL needed — the main bundle is ~141 kB gzip.
+
+Respects `prefers-reduced-motion` (portrait prints instantly, no smooth scroll, logs shown in full).
 
 ## Run it
 
@@ -29,8 +38,4 @@ npm run shots     # refresh project screenshots (Playwright)
 
 ## Edit content
 
-All copy — projects, experience, stats, links — lives in [`src/data/content.ts`](src/data/content.ts).
-
-## Deploy
-
-`netlify.toml` builds with `npm run build` and publishes `dist/` on Node 22.
+All copy lives in [`src/data/content.ts`](src/data/content.ts). Swap `public/portrait.jpg` for a new photo (square, plain light background works best).

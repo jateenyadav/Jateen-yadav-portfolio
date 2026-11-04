@@ -43,14 +43,4 @@ export function scrollToTarget(target: string | number) {
   else document.querySelector(target)?.scrollIntoView()
 }
 
-/** Particle-field shape index per section (see ParticleField). */
-export function setMorph(index: number) {
-  window.dispatchEvent(new CustomEvent<number>('morph', { detail: index }))
-}
-
-/** Dim the particle field behind text-heavy sections (1 = full strength). */
-export function setFieldOpacity(value: number) {
-  window.dispatchEvent(new CustomEvent<number>('fieldopacity', { detail: value }))
-}
-
 export { gsap, ScrollTrigger, SplitText, useGSAP }

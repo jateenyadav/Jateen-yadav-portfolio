@@ -1,104 +1,102 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap, useGSAP, SplitText, scrollToTarget, prefersReducedMotion } from '../lib/motion'
-import { hero, profile } from '../data/content'
+import { hero, profile, ticker } from '../data/content'
 import Magnetic from './Magnetic'
+import PrintPortrait from './PrintPortrait'
+import StationBar from './StationBar'
 
 function useLocalTime(tz: string) {
   const fmt = () =>
-    new Intl.DateTimeFormat('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: tz }).format(new Date())
+    new Intl.DateTimeFormat('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: tz }).format(new Date())
   const [time, setTime] = useState(fmt)
   useEffect(() => {
-    const id = setInterval(() => setTime(fmt()), 15000)
+    const id = setInterval(() => setTime(fmt()), 1000)
     return () => clearInterval(id)
   })
   return time
 }
 
-export default function Hero({ ready }: { ready: boolean }) {
+export default function Hero() {
   const root = useRef<HTMLElement>(null)
-  const title = useRef<HTMLHeadingElement>(null)
   const time = useLocalTime(profile.timezone)
 
   useGSAP(
     () => {
-      if (!title.current) return
-      const reduced = prefersReducedMotion()
-      const split = SplitText.create(title.current, { type: 'lines,chars', mask: 'lines', linesClass: 'hero-line' })
-
-      if (reduced) return () => split.revert()
-
-      gsap.set(split.chars, { yPercent: 115 })
-      gsap.set('.hero__meta > *, .hero__intro, .hero__cta > *, .scroll-hint', { opacity: 0, y: 24 })
-
-      if (!ready) return () => split.revert()
-
-      const tl = gsap.timeline({ delay: 0.15 })
-      tl.to(split.chars, {
-        yPercent: 0,
-        duration: 1.3,
-        ease: 'expo.out',
-        stagger: { each: 0.018, from: 'start' },
-      })
-        .to('.hero__meta > *', { opacity: 1, y: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06 }, 0.35)
-        .to('.hero__intro, .hero__cta > *, .scroll-hint', { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.08 }, 0.7)
-
-      // Scroll-out: the headline drifts up and dims as you leave the hero.
-      gsap.to(title.current, {
-        yPercent: -18,
-        opacity: 0.25,
-        ease: 'none',
-        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true },
-      })
-
+      if (prefersReducedMotion()) return
+      // Letters are "stamped" onto the sheet one at a time, in random order.
+      const split = SplitText.create('.hero__name', { type: 'chars' })
+      const tl = gsap.timeline({ delay: 0.2 })
+      tl.from(split.chars, { opacity: 0, scale: 1.6, duration: 0.18, ease: 'steps(2)', stagger: { each: 0.06, from: 'random' } })
+        .from('.hero__model, .hero__line, .hero__cta > *, .hero__label > div', { opacity: 0, y: 14, duration: 0.6, ease: 'power3.out', stagger: 0.07 }, 0.3)
+        .from('.annot', { opacity: 0, x: 16, duration: 0.6, ease: 'power3.out' }, 3.4)
       return () => split.revert()
     },
-    { dependencies: [ready], scope: root },
+    { scope: root },
   )
 
   return (
-    <section ref={root} id="top" className="hero" data-morph="0">
-      <div className="hero__meta mono">
-        <span>(JY) {hero.kicker}</span>
-        <span>{profile.roles.join(' · ')}</span>
-        <span>
-          {profile.location} — {time} IST
-        </span>
-      </div>
+    <section ref={root} id="top" className="stn hero">
+      <StationBar code="00" name="Print head" state="Running" extra={`${profile.location} · ${time} IST`} />
 
-      <h1 ref={title} className="hero__title" aria-label={`${hero.lineA} ${hero.lineB} ${hero.lineC}`}>
-        <span className="block">{hero.lineA}</span>
-        <span className="block indent">
-          for <span className="serif">every screen</span>
-        </span>
-        <span className="block">{hero.lineC}</span>
-      </h1>
+      <div className="hero__grid">
+        <div className="hero__left">
+          <p className="hero__model mono">
+            Model {profile.model} — {profile.roles.join(' · ')}
+          </p>
+          <h1 className="hero__name">
+            <span className="block">{hero.title[0]}</span>
+            <span className="block">{hero.title[1]}</span>
+          </h1>
+          <p className="hero__line">{hero.line}</p>
+          <div className="hero__cta">
+            <Magnetic>
+              <a
+                href="#work"
+                className="btn btn--ink"
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToTarget('#work')
+                }}
+              >
+                Inspect the units <span aria-hidden="true">↓</span>
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a href={profile.resume} className="btn" target="_blank" rel="noreferrer">
+                Download spec (CV) <span aria-hidden="true">↗</span>
+              </a>
+            </Magnetic>
+          </div>
+          <dl className="hero__label mono">
+            <div>
+              <dt>Origin</dt>
+              <dd>{profile.location}</dd>
+            </div>
+            <div>
+              <dt>Uptime</dt>
+              <dd>3+ yrs production</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd className="ok">● {profile.status}</dd>
+            </div>
+          </dl>
+        </div>
 
-      <div className="hero__foot">
-        <p className="hero__intro">{hero.intro}</p>
-        <div className="hero__cta">
-          <Magnetic>
-            <a
-              href="#work"
-              className="btn btn--solid"
-              onClick={(e) => {
-                e.preventDefault()
-                scrollToTarget('#work')
-              }}
-            >
-              See the work <span className="btn__arrow">↘</span>
-            </a>
-          </Magnetic>
-          <Magnetic>
-            <a href={`mailto:${profile.email}`} className="btn">
-              Say hello <span className="btn__arrow">↗</span>
-            </a>
-          </Magnetic>
+        <div className="hero__right">
+          <PrintPortrait src={profile.portrait} />
+          <span className="annot serif">{hero.note} ↘</span>
         </div>
       </div>
 
-      <div className="scroll-hint mono" aria-hidden="true">
-        <span>Scroll</span>
-        <span className="scroll-hint__line" />
+      <div className="ticker mono" aria-label="Status feed">
+        <div className="ticker__track">
+          {[...ticker, ...ticker].map((t, i) => (
+            <span key={i} className="ticker__item">
+              <i aria-hidden="true">■</i> {t}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   )

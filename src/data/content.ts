@@ -5,12 +5,14 @@ export const profile = {
   name: 'Jateen Yadav',
   firstName: 'Jateen',
   lastName: 'Yadav',
+  model: 'JY-2026',
   roles: ['Full Stack', 'Flutter', 'AI / LLM'],
   location: 'Gurugram, India',
   timezone: 'Asia/Kolkata',
   email: 'jateen.yadav1@gmail.com',
   resume: '/Jateen_Yadav_Resume.pdf',
-  status: 'Open to new roles',
+  portrait: '/portrait.jpg',
+  status: 'Available for new roles',
   socials: [
     { label: 'GitHub', href: 'https://github.com/jateenyadav' },
     // NOTE: the CV says /in/jateen-yadav, the old site used /in/jateen-yadav-9012a9213 — keep whichever is correct.
@@ -19,58 +21,87 @@ export const profile = {
   ],
 }
 
-export const hero = {
-  kicker: 'Portfolio — 2026',
-  lineA: 'I build products',
-  lineB: 'for every screen',
-  lineC: 'and teach them to think.',
-  intro:
-    'Full-stack engineer at Hitachi with 3+ years shipping real-time dashboards, Flutter & Electron apps, and AI features on AWS Bedrock + MCP.',
-}
-
-export const statement =
-  'I work in the hard middle — where a React dashboard, a Flutter app, an Electron client and an AI assistant all have to share one architecture, one backend and one source of truth. I ship it, measure it, and make it fast.'
-
-export const stats = [
-  { value: 3, suffix: '+', label: 'Years shipping production software' },
-  { value: 4, suffix: '+', label: 'Full-stack apps built end to end' },
-  { value: 4, suffix: '+', label: 'Flutter apps on Play Console & TestFlight' },
-  { value: 3, suffix: '', label: 'Platforms from one shared architecture' },
+/** The assembly line — one station per section. */
+export const stations = [
+  { id: 'top', code: '00', name: 'Print' },
+  { id: 'spec', code: '01', name: 'Spec' },
+  { id: 'modules', code: '02', name: 'Modules' },
+  { id: 'work', code: '03', name: 'Units' },
+  { id: 'log', code: '04', name: 'Log' },
+  { id: 'contact', code: '05', name: 'Dispatch' },
 ]
 
-export const marqueeA = ['React', 'TypeScript', 'Next.js', 'Node.js', 'Flutter', 'Three.js', 'WebGL', 'Electron', 'Kotlin', 'MongoDB']
-export const marqueeB = ['AWS Bedrock', 'MCP', 'RAG', 'Ollama', 'OpenAI', 'Gemini', 'LangChain', 'Prisma', 'Docker', 'Redux']
+export const hero = {
+  title: ['Jateen', 'Yadav'],
+  line: 'Full-stack engineer. I assemble products for every screen — web, mobile, desktop — and wire them to AI.',
+  note: 'that’s me — printed from my own code',
+}
 
-export const capabilities = [
+export const ticker = [
+  'LifeOS — Google Play closed testing',
+  'ExamAce — live on Vercel',
+  '3+ yrs in production at Hitachi',
+  'AWS Bedrock · MCP · RAG',
+  'Flutter · React · Electron — one architecture',
+  'Open to new roles — 2026',
+]
+
+export const statement =
+  'I work in the hard middle — where a React dashboard, a Flutter app, an Electron client and an AI assistant all share one architecture, one backend and one source of truth.'
+
+export const spec: [string, string][] = [
+  ['Model', 'JY-2026'],
+  ['Operator', 'Jateen Yadav'],
+  ['Function', 'Full Stack · Flutter · AI / LLM'],
+  ['In service', 'Since 2023 — Hitachi India'],
+  ['Platforms', 'Web · Android · iOS · Desktop'],
+  ['AI stack', 'AWS Bedrock · MCP · RAG · Ollama'],
+  ['Origin', 'Gurugram, India (IST)'],
+  ['Works with', 'Teams in India & Japan'],
+]
+
+export const stats = [
+  { value: 3, suffix: '+', label: 'Years uptime in production' },
+  { value: 4, suffix: '+', label: 'Full-stack units shipped' },
+  { value: 4, suffix: '+', label: 'Flutter apps on Play & TestFlight' },
+  { value: 3, suffix: '', label: 'Platforms · 1 architecture' },
+]
+
+export const modules = [
   {
+    code: 'MOD-01',
     title: 'Web',
     tagline: 'Real-time dashboards & product frontends',
-    detail:
-      'React, Next.js, TypeScript, Redux / Zustand. Live machine data for overseas clients, lazy-loaded and Webpack-tuned for speed.',
+    stack: 'React · Next.js · TypeScript · Redux · Zustand',
+    log: ['$ build dashboard --live machine-data', '✓ websockets → overseas client screens', '✓ lazy routes + webpack tuning → faster loads'],
   },
   {
+    code: 'MOD-02',
     title: 'Mobile',
     tagline: 'Flutter apps that actually ship',
-    detail:
-      'Flutter + Dart for Android & iOS, native Kotlin services where it matters. Released through Google Play Console and TestFlight.',
+    stack: 'Flutter · Dart · Kotlin',
+    log: ['$ flutter build appbundle --release', '✓ Google Play Console · Apple TestFlight', '✓ Kotlin service: payment notification → expense'],
   },
   {
+    code: 'MOD-03',
     title: 'Desktop',
     tagline: 'One architecture, three platforms',
-    detail:
-      'Electron desktop clients built from the same shared architecture as the Flutter mobile apps — less duplicated logic, faster releases.',
+    stack: 'Electron · shared core',
+    log: ['$ electron-builder --mac --win', '✓ same core as the Flutter mobile apps', '✓ fewer duplicate fixes, faster releases'],
   },
   {
+    code: 'MOD-04',
     title: 'AI / LLM',
     tagline: 'Features you can talk to',
-    detail:
-      'AWS Bedrock pipelines, MCP servers so AI assistants can drive product features, RAG with source references, local-first Ollama.',
+    stack: 'AWS Bedrock · MCP · LangChain · RAG · Ollama',
+    log: ['> new ChatBedrockConverse({ temperature: 0.2, maxTokens: 800 })', '> mcp: token-scoped tools for AI assistants ✓', '> rag: answers cite their sources ✓'],
   },
   {
+    code: 'MOD-05',
     title: '3D / WebGL',
     tagline: 'Interfaces with depth',
-    detail:
-      'Three.js and WebGL product visualisations for client demos — the particle field behind this page is one of them.',
+    stack: 'Three.js · WebGL',
+    log: ['$ three --scene product-viz', '✓ interactive 3D demos for clients', '✓ less manual demo effort'],
   },
 ]
 
@@ -80,13 +111,13 @@ export type Project = {
   title: string
   kind: string
   status: string
+  stamp: string
   summary: string
   points: string[]
   stack: string[]
   image?: string
   visual?: 'phone'
   links: { label: string; href: string }[]
-  accent: string
 }
 
 export const projects: Project[] = [
@@ -95,91 +126,85 @@ export const projects: Project[] = [
     index: '01',
     title: 'LifeOS',
     kind: 'Cross-platform personal AI',
-    status: 'Google Play — closed testing',
+    status: 'In QA — Google Play closed testing',
+    stamp: 'In QA',
     summary:
       'One app for your whole life — notes, reminders, workouts, routines and expenses — on web, Android and iOS, with an AI assistant that reads your own data.',
     points: [
       'React web + shared Flutter app on one backend',
-      'Local-first AI (Ollama) with optional OpenAI / Bedrock; RAG answers cite their sources',
-      'Kotlin service turns INR payment notifications into expenses — encrypted queue, retries, dedupe',
-      'bcrypt, hashed session tokens, rate limits, integer-paise money storage, tests on every layer',
+      'Local-first AI (Ollama), optional OpenAI / Bedrock; RAG answers cite sources',
+      'Kotlin: INR payment notifications → expenses (encrypted queue, retries, dedupe)',
+      'bcrypt, hashed session tokens, rate limits, integer-paise money, tests on every layer',
     ],
     stack: ['React', 'Flutter', 'Kotlin', 'Node.js', 'MongoDB', 'Ollama', 'Bedrock'],
     visual: 'phone',
     links: [{ label: 'Code', href: 'https://github.com/jateenyadav/Me-Assistant' }],
-    accent: '#c5f03c',
   },
   {
     id: 'examace',
     index: '02',
     title: 'ExamAce',
     kind: 'AI exam practice platform',
-    status: 'Live',
+    status: 'Live — Vercel',
+    stamp: 'Live',
     summary:
-      'AI-generated CBSE & JEE practice papers, camera-based evaluation of handwritten answers, a timed anti-cheating exam mode and performance analytics.',
-    points: [
-      'Gemini for generation with automatic OpenRouter fallback',
-      'Photograph a handwritten answer → AI grades it',
-      'Anti-cheat timed mode + per-topic analytics',
-    ],
-    stack: ['Next.js 14', 'TypeScript', 'Prisma', 'Zustand', 'Gemini', 'Vercel'],
+      'AI-generated CBSE & JEE practice papers, camera-based grading of handwritten answers, a timed anti-cheating exam mode and performance analytics.',
+    points: ['Gemini generation with automatic OpenRouter fallback', 'Photograph a handwritten answer → AI grades it', 'Anti-cheat timed mode + per-topic analytics'],
+    stack: ['Next.js 14', 'TypeScript', 'Prisma', 'Zustand', 'Gemini'],
     image: '/shots/examace.jpg',
     links: [
       { label: 'Live', href: 'https://exam-ai-tau-bay.vercel.app' },
       { label: 'Code', href: 'https://github.com/jateenyadav/Exam-AI' },
     ],
-    accent: '#7aa2ff',
   },
   {
     id: 'solar',
     index: '03',
     title: 'Solar System',
     kind: 'Interactive 3D in the browser',
-    status: 'Live',
-    summary:
-      'A real-time Three.js solar system with orbiting planets, lighting and camera controls — WebGL that runs smoothly in any browser.',
-    points: ['Three.js scene graph & orbital animation', 'Textured planets, lighting, orbit controls'],
+    status: 'Live — Netlify',
+    stamp: 'Live',
+    summary: 'A real-time Three.js solar system with Indian space missions, orbiting planets, lighting and camera controls.',
+    points: ['Three.js scene graph & orbital animation', 'Textured planets, labels, orbit controls'],
     stack: ['Three.js', 'WebGL', 'JavaScript'],
     image: '/shots/solar.jpg',
     links: [
       { label: 'Live', href: 'https://3d-solar-galaxy.netlify.app' },
       { label: 'Code', href: 'https://github.com/jateenyadav/3d-solar-system' },
     ],
-    accent: '#ffb347',
   },
   {
     id: 'client',
     index: '04',
     title: 'Client Portfolio',
     kind: 'Freelance — marketing site',
-    status: 'Live',
+    status: 'Live — delivered to client',
+    stamp: 'Shipped',
     summary:
       'An animated single-page portfolio designed and built end to end for a Dubai-based marketing executive — two themes, typographic hero, motion throughout.',
     points: ['Designed + developed for a real client', 'Dark / light themes with persisted preference'],
-    stack: ['HTML', 'CSS', 'JavaScript', 'Motion'],
+    stack: ['HTML', 'CSS', 'JavaScript'],
     image: '/shots/client.jpg',
     links: [
       { label: 'Live', href: 'https://jateenyadav.github.io/client-portfolio/' },
       { label: 'Code', href: 'https://github.com/jateenyadav/client-portfolio' },
     ],
-    accent: '#ff6fb5',
   },
   {
     id: 'card',
     index: '05',
     title: 'Digital Card',
     kind: 'Installable PWA',
-    status: 'Live',
-    summary:
-      'An offline-first digital business card you install to your home screen — Three.js particle background, QR connect and one-tap save-contact.',
-    points: ['Service worker caches the full app shell, incl. bundled Three.js', 'Installable on Android & iOS'],
+    status: 'Live — GitHub Pages',
+    stamp: 'Live',
+    summary: 'An offline-first digital business card you install to your home screen — Three.js background, QR connect, one-tap save-contact.',
+    points: ['Service worker caches the whole app shell', 'Installable on Android & iOS'],
     stack: ['PWA', 'Three.js', 'Service Worker'],
     image: '/shots/card.jpg',
     links: [
       { label: 'Live', href: 'https://jateenyadav.github.io/digital-card/' },
       { label: 'Code', href: 'https://github.com/jateenyadav/digital-card' },
     ],
-    accent: '#ff5a4e',
   },
 ]
 
@@ -192,44 +217,51 @@ export const archive = [
 
 export const experience = [
   {
-    role: 'Full Stack Developer',
-    sub: 'Junior Research Engineer',
+    when: '2023-09 → NOW',
+    state: 'RUNNING',
+    role: 'Full Stack Developer (Junior Research Engineer)',
     company: 'Hitachi India Pvt. Ltd. (via Randstad)',
-    period: 'Sep 2023 — Present',
     points: [
-      'Real-time enterprise dashboards (React, Node.js, MongoDB) serving overseas clients with live machine data and analytics',
+      'Real-time enterprise dashboards (React, Node.js, MongoDB) for overseas clients — live machine data, auth, analytics',
       'Electron desktop + Flutter mobile apps from one shared architecture',
-      'Three.js / WebGL 3D product visualisations that cut manual demo effort',
+      'Three.js / WebGL 3D product visualisations for client demos',
       'AI/LLM pipelines on AWS Bedrock; backend services exposed to AI assistants via MCP',
       'Production releases with global stakeholders, including teams in Japan',
     ],
   },
   {
+    when: '2023-02 → 2023-05',
+    state: 'PROMOTED',
     role: 'Software Engineering Intern',
-    sub: 'Converted to full-time',
     company: 'Hitachi India Pvt. Ltd.',
-    period: 'Feb 2023 — May 2023',
-    points: ['React dashboard for factory operators: real-time machine states + production simulations on an assembly line'],
+    points: ['React dashboard for factory operators: real-time machine states + production simulations on an assembly line', 'Converted to full-time within the year'],
   },
   {
+    when: '2022-06 → 2022-07',
+    state: 'DONE',
     role: 'Frontend Engineering Intern',
-    sub: '',
     company: 'Acadlift.com',
-    period: 'Jun 2022 — Jul 2022',
     points: ['Reusable React component library'],
   },
   {
+    when: '2021-09 → 2021-10',
+    state: 'DONE',
     role: 'Frontend & Analytics Intern',
-    sub: '',
     company: 'GoPerspective Technologies',
-    period: 'Sep 2021 — Oct 2021',
     points: ['ML dashboards with Python'],
   },
   {
+    when: '2021-04 → 2021-05',
+    state: 'DONE',
     role: 'Design Intern',
-    sub: '',
     company: 'iSchoolConnect Technologies',
-    period: 'Apr 2021 — May 2021',
     points: ['UI layout and logos for an event portal'],
+  },
+  {
+    when: '2019 → 2023',
+    state: 'BOOT',
+    role: 'B.Tech, Computer Science & Engineering',
+    company: 'Kurukshetra University (JMIT Radaur) · CGPA 8.43',
+    points: ['Meta Front-End Developer certificate · Mozilla JavaScript Foundations'],
   },
 ]
