@@ -50,7 +50,6 @@ export const statement =
   'I work in the hard middle — where a React dashboard, a Flutter app, an Electron client and an AI assistant all share one architecture, one backend and one source of truth.'
 
 export const spec: [string, string][] = [
-  ['Model', 'JY-2026'],
   ['Operator', 'Jateen Yadav'],
   ['Function', 'Full Stack · Flutter · AI / LLM'],
   ['In service', 'Since 2023 — Hitachi India'],
@@ -60,11 +59,12 @@ export const spec: [string, string][] = [
   ['Works with', 'Teams in India & Japan'],
 ]
 
+// `unit` sits beside every number so all four gauges read the same way; `max` scales the bar.
 export const stats = [
-  { value: 3, suffix: '+', label: 'Years uptime in production' },
-  { value: 4, suffix: '+', label: 'Full-stack units shipped' },
-  { value: 4, suffix: '+', label: 'Flutter apps on Play & TestFlight' },
-  { value: 3, suffix: '', label: 'Platforms · 1 architecture' },
+  { value: 3, unit: 'yrs+', max: 5, label: 'Uptime in production' },
+  { value: 4, unit: 'apps+', max: 5, label: 'Full-stack units shipped' },
+  { value: 4, unit: 'apps+', max: 5, label: 'Flutter on Play & TestFlight' },
+  { value: 3, unit: 'OS', max: 5, label: 'Platforms from 1 architecture' },
 ]
 
 export const modules = [

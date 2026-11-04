@@ -63,7 +63,7 @@ export default function Hero() {
             </Magnetic>
             <Magnetic>
               <a href={profile.resume} className="btn" target="_blank" rel="noreferrer">
-                Download spec (CV) <span aria-hidden="true">↗</span>
+                Download CV <span aria-hidden="true">↗</span>
               </a>
             </Magnetic>
           </div>
@@ -78,7 +78,7 @@ export default function Hero() {
             </div>
             <div>
               <dt>Status</dt>
-              <dd className="ok">● {profile.status}</dd>
+              <dd className="ok">● Available</dd>
             </div>
           </dl>
         </div>

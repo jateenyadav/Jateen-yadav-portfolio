@@ -52,13 +52,15 @@ export default function Dispatch() {
 
   return (
     <section ref={root} id="contact" className="stn dispatch-stn">
-      <StationBar code="05" name="Dispatch" state="Ready to ship" />
+      <StationBar code="05" name="Dispatch" state="Ready to ship" extra="Lead time: notice period" />
       <div className="dispatch">
         <div className="dispatch__left">
           <h2 className="dispatch__title">
-            Ready to ship
+            Ready to
             <br />
-            to <span className="accent">your team.</span>
+            ship to
+            <br />
+            <span className="accent">your team.</span>
           </h2>
           <button className="email" onClick={copy} data-cursor={copied ? 'Copied' : 'Copy'}>
             {profile.email}

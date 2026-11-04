@@ -18,9 +18,9 @@ export default function Modules() {
 
   return (
     <section ref={root} id="modules" className="stn">
-      <StationBar code="02" name="Modules" state={`${modules.length} loaded`} />
+      <StationBar code="02" name="Modules" state={`${modules.length} loaded`} extra="Hover a module to run it" />
       <h2 className="h2">
-        Modules <span className="serif">on the line</span>
+        Modules <span className="serif">loaded</span>
       </h2>
       <ul className="mods">
         {modules.map((m, i) => (

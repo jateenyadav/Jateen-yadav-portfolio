@@ -49,7 +49,7 @@ function Unit({ p }: { p: Project }) {
         <span>{p.status}</span>
       </div>
       <div className="unit__grid">
-        <a className="unit__visual" href={live} target="_blank" rel="noreferrer" data-cursor="Open" aria-label={`Open ${p.title}`}>
+        <a className={`unit__visual ${p.visual === 'phone' ? 'unit__visual--phone' : ''}`} href={live} target="_blank" rel="noreferrer" data-cursor="Open" aria-label={`Open ${p.title}`}>
           {p.visual === 'phone' ? (
             <ScanImage>
               <PhoneMock />

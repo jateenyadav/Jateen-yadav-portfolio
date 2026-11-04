@@ -25,7 +25,7 @@ export default function Logbook() {
 
   return (
     <section ref={root} id="log" className="stn">
-      <StationBar code="04" name="Service log" state="Since 2021" />
+      <StationBar code="04" name="Service log" state="Running" extra={`${experience.length} entries · since 2019`} />
       <h2 className="h2">
         Service <span className="serif">log</span>
       </h2>

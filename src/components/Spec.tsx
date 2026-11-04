@@ -4,7 +4,8 @@ import { profile, spec, statement, stats } from '../data/content'
 import Barcode from './Barcode'
 import StationBar from './StationBar'
 
-const HIGHLIGHT = new Set(['one', 'architecture,', 'truth.'])
+// Only the repeated "one" and the payoff word are inked in accent.
+const HIGHLIGHT = new Set(['one', 'truth.'])
 
 export default function Spec() {
   const root = useRef<HTMLElement>(null)
@@ -46,7 +47,10 @@ export default function Spec() {
 
   return (
     <section ref={root} id="spec" className="stn">
-      <StationBar code="01" name="Spec sheet" state="Verified" />
+      <StationBar code="01" name="Spec sheet" state="Verified" extra="Plate 01 / 01" />
+      <h2 className="h2">
+        Spec <span className="serif">sheet</span>
+      </h2>
       <div className="spec">
         <p className="spec__statement">
           {statement.split(' ').map((word, i) => (
@@ -87,10 +91,10 @@ export default function Spec() {
               <span className="gauge__num" data-value={s.value}>
                 {String(s.value).padStart(2, '0')}
               </span>
-              <span className="gauge__suffix">{s.suffix}</span>
+              <span className="gauge__unit mono">{s.unit}</span>
             </div>
             <div className="gauge__bar" aria-hidden="true">
-              <span className="gauge__fill" />
+              <span className="gauge__fill" style={{ width: `${(s.value / s.max) * 100}%` }} />
             </div>
             <div className="gauge__label mono">{s.label}</div>
           </div>
