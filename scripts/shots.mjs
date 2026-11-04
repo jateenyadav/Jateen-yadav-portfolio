@@ -6,7 +6,6 @@ const targets = [
   ['examace', 'https://exam-ai-tau-bay.vercel.app'],
   ['solar', 'https://3d-solar-galaxy.netlify.app'],
   ['client', 'https://jateenyadav.github.io/client-portfolio/'],
-  ['card', 'https://jateenyadav.github.io/digital-card/'],
 ]
 
 const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })

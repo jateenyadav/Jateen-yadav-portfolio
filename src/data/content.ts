@@ -190,22 +190,6 @@ export const projects: Project[] = [
       { label: 'Code', href: 'https://github.com/jateenyadav/client-portfolio' },
     ],
   },
-  {
-    id: 'card',
-    index: '05',
-    title: 'Digital Card',
-    kind: 'Installable PWA',
-    status: 'Live — GitHub Pages',
-    stamp: 'Live',
-    summary: 'An offline-first digital business card you install to your home screen — Three.js background, QR connect, one-tap save-contact.',
-    points: ['Service worker caches the whole app shell', 'Installable on Android & iOS'],
-    stack: ['PWA', 'Three.js', 'Service Worker'],
-    image: '/shots/card.jpg',
-    links: [
-      { label: 'Live', href: 'https://jateenyadav.github.io/digital-card/' },
-      { label: 'Code', href: 'https://github.com/jateenyadav/digital-card' },
-    ],
-  },
 ]
 
 export const archive = [
