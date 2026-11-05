@@ -55,7 +55,7 @@ export const spec: [string, string][] = [
   ['Platforms', 'Web · Android · iOS · Desktop'],
   ['AI stack', 'AWS Bedrock · MCP · RAG · Ollama'],
   ['Origin', 'Gurugram, India (IST)'],
-  ['Works with', 'Teams in India & Japan'],
+  ['Works with', 'Teams in India, Japan & Europe'],
 ]
 
 // `unit` sits beside every number so all four gauges read the same way; `max` scales the bar.
@@ -209,7 +209,7 @@ export const experience = [
       'Electron desktop + Flutter mobile apps from one shared architecture',
       'Three.js / WebGL 3D product visualisations for client demos',
       'AI/LLM pipelines on AWS Bedrock; backend services exposed to AI assistants via MCP',
-      'Production releases with global stakeholders, including teams in Japan',
+      'Production releases with global stakeholders, including teams in Japan and Europe',
     ],
   },
   {

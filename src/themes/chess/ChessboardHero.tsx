@@ -436,7 +436,7 @@ const ChessboardHero = () => {
                 <h4>Backend &amp; Data</h4>
                 <p>Built Node.js/Express.js services with MongoDB, Firebase Auth, and real-time Firestore sync, maintaining 99%+ data consistency across concurrent client sessions.</p>
                 <h4>AI &amp; 3D</h4>
-                <p>Built AI/LLM pipelines on AWS Bedrock and exposed backend services to AI assistants through MCP. Created Three.js/WebGL 3D product visualisations for client demos, and shipped production releases with global stakeholders, including teams in Japan.</p>
+                <p>Built AI/LLM pipelines on AWS Bedrock and exposed backend services to AI assistants through MCP. Created Three.js/WebGL 3D product visualisations for client demos, and shipped production releases with global stakeholders, including teams in Japan and Europe.</p>
                 <div className="skills-used">
                   <span className="skill-tag">React.js</span>
                   <span className="skill-tag">Node.js</span>
@@ -747,7 +747,7 @@ const ChessboardHero = () => {
                 </div>
                 <div className="skill-item">
                   <div className="skill-name-container">
-                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" style={{width: '20px', height: '20px'}} /></span>
+                    <span className="skill-icon"><img src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" style={{width: '20px', height: '20px'}} /></span>
                     <span className="skill-name">AWS (basics)</span>
                   </div>
                   <div className="skill-bar">
