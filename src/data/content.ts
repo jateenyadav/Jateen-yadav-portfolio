@@ -125,8 +125,8 @@ export const projects: Project[] = [
     index: '01',
     title: 'LifeOS',
     kind: 'Cross-platform personal AI',
-    status: 'In QA — Google Play closed testing',
-    stamp: 'In QA',
+    status: 'Live on web — Android in closed testing',
+    stamp: 'Live',
     summary:
       'One app for your whole life — notes, reminders, workouts, routines and expenses — on web, Android and iOS, with an AI assistant that reads your own data.',
     points: [
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     ],
     stack: ['React', 'Flutter', 'Kotlin', 'Node.js', 'MongoDB', 'Ollama', 'Bedrock'],
     visual: 'phone',
-    links: [{ label: 'Code', href: 'https://github.com/jateenyadav/Me-Assistant' }],
+    links: [{ label: 'Live', href: 'https://lifeos-jateen.netlify.app' }],
   },
   {
     id: 'examace',
