@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap, useGSAP, SplitText, scrollToTarget, prefersReducedMotion } from '../lib/motion'
-import { hero, profile, ticker } from '../data/content'
-import Magnetic from './Magnetic'
+import { gsap, useGSAP, SplitText, scrollToTarget, prefersReducedMotion } from '../../../lib/motion'
+import { hero, profile, ticker } from '../../../data/content'
+import Magnetic from '../../../shared/Magnetic'
 import PrintPortrait from './PrintPortrait'
 import StationBar from './StationBar'
 

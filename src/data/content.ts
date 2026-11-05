@@ -1,4 +1,4 @@
-// All site copy lives here — edit this file to update the portfolio.
+// All site copy lives here — every theme reads from this file, so edit once and all themes update.
 // Everything below is taken from Jateen's CV and public GitHub repos.
 
 export const profile = {
@@ -15,8 +15,7 @@ export const profile = {
   status: 'Available for new roles',
   socials: [
     { label: 'GitHub', href: 'https://github.com/jateenyadav' },
-    // NOTE: the CV says /in/jateen-yadav, the old site used /in/jateen-yadav-9012a9213 — keep whichever is correct.
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/jateen-yadav' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jateen-yadav' },
     { label: 'Instagram', href: 'https://instagram.com/jateen_yadav' },
   ],
 }

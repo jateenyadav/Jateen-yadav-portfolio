@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
-import { gsap, useGSAP, SplitText, scrollToTarget, prefersReducedMotion } from '../lib/motion'
-import { profile } from '../data/content'
+import { gsap, useGSAP, SplitText, scrollToTarget, prefersReducedMotion } from '../../../lib/motion'
+import { profile } from '../../../data/content'
 import Barcode from './Barcode'
-import Magnetic from './Magnetic'
+import Magnetic from '../../../shared/Magnetic'
 import StationBar from './StationBar'
 
 const order = [

@@ -1,6 +1,6 @@
 import { useRef } from 'react'
-import { gsap, useGSAP, prefersReducedMotion } from '../lib/motion'
-import { experience, profile } from '../data/content'
+import { gsap, useGSAP, prefersReducedMotion } from '../../../lib/motion'
+import { experience, profile } from '../../../data/content'
 import StationBar from './StationBar'
 
 /** Experience printed on continuous-feed, green-bar computer paper. */
@@ -18,7 +18,10 @@ export default function Logbook() {
           { clipPath: 'inset(0 0 0% 0)', duration: 0.9, ease: 'steps(10)', scrollTrigger: { trigger: entry, start: 'top 82%' } },
         )
       })
-      gsap.fromTo('.paper', { y: -40 }, { y: 40, ease: 'none', scrollTrigger: { trigger: '.paper', start: 'top bottom', end: 'bottom top', scrub: true } })
+      // Drift only on wide screens: on phones the heading sits too close and the paper would cover it.
+      gsap.matchMedia().add('(min-width: 1001px)', () => {
+        gsap.fromTo('.paper', { y: 0 }, { y: 48, ease: 'none', scrollTrigger: { trigger: '.paper', start: 'top bottom', end: 'bottom top', scrub: true } })
+      })
     },
     { scope: root },
   )

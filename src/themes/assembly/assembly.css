@@ -123,6 +123,10 @@ h3 {
   display: block;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .h2 {
   margin: 0 0 clamp(28px, 4vw, 56px);
   font-size: clamp(44px, 7.4vw, 128px);
@@ -323,6 +327,8 @@ h3 {
 
 .line {
   padding-left: var(--rail-w);
+  /* clip (not hidden): stops animated overflow from widening the phone viewport, keeps sticky working */
+  overflow-x: clip;
 }
 
 @media (max-width: 1000px) {
@@ -532,6 +538,18 @@ h3 {
 @media (max-width: 640px) {
   .stn__extra {
     display: none;
+  }
+  .stn__bar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .stn__bar > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .stn__state {
+    grid-column: 2;
+    white-space: nowrap;
   }
 }
 
@@ -830,7 +848,8 @@ h3 {
 
 @media (max-width: 1000px) {
   .hero__grid {
-    grid-template-columns: 1fr;
+    /* minmax(0,…): the column may shrink below its content's no-wrap width */
+    grid-template-columns: minmax(0, 1fr);
   }
   .hero__grid {
     margin-top: 8px;
@@ -1077,7 +1096,7 @@ h3 {
 
 @media (max-width: 1000px) {
   .spec {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .gauges {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1237,10 +1256,24 @@ h3 {
 @media (max-width: 760px) {
   .mod__head {
     grid-template-columns: 14px minmax(0, 1fr) auto;
+    row-gap: 6px;
   }
-  .mod__code,
-  .mod__tag {
+  .mod__code {
     display: none;
+  }
+  /* the tagline moves under the title, so a phone row still says what the module is */
+  .mod__led,
+  .mod__state {
+    grid-row: 1 / span 2;
+  }
+  .mod__title {
+    grid-column: 2;
+  }
+  .mod__tag {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 14px;
+    line-height: 1.35;
   }
   .mod__stack,
   .mod__log {
@@ -1248,7 +1281,7 @@ h3 {
     padding-left: 12px;
   }
   .mod__log {
-    font-size: 10.5px;
+    font-size: 11px;
     overflow-x: auto;
   }
 }
@@ -1589,7 +1622,7 @@ h3 {
 
 @media (max-width: 1000px) {
   .unit__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .unit__visual {
     min-height: 0;
@@ -1599,6 +1632,16 @@ h3 {
   }
   .unit__bar > span:last-child {
     display: none;
+  }
+  .unit__bar {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .unit__bar > span {
+    white-space: nowrap;
+  }
+  .unit__bar-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .unit__visual--phone {
     aspect-ratio: 4 / 5;
@@ -1758,7 +1801,7 @@ h3 {
     grid-column: 1 / -1;
   }
   .paper__head {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 4px;
   }
   .paper__head > span:last-child {
@@ -1910,7 +1953,7 @@ h3 {
 
 @media (max-width: 1000px) {
   .dispatch {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1925,6 +1968,107 @@ h3 {
   }
   .dispatch__links > .magnetic {
     display: block;
+  }
+}
+
+/* ------------------------------------------------------ theme switcher */
+
+.tsw {
+  --tsw-bg: var(--ink);
+  --tsw-fg: var(--paper);
+  --tsw-accent: var(--accent);
+  --tsw-radius: 0;
+  --tsw-panel-radius: 0;
+  --tsw-font: var(--f-display);
+  --tsw-shadow: 6px 6px 0 rgba(20, 20, 19, 0.18);
+}
+
+.tsw__swatch {
+  border-radius: 0;
+}
+
+/* ------------------------------------------------------------ phones */
+
+@media (max-width: 560px) {
+  /* tighter rhythm: sections were separated by ~165px of empty paper */
+  .stn {
+    padding: 56px var(--gutter) 64px;
+  }
+  .stn.hero {
+    padding-top: calc(var(--nav-h) + 20px);
+    padding-bottom: 0;
+  }
+  .stn__bar {
+    margin-bottom: 28px;
+  }
+
+  /* headlines scale with the screen so "JATEEN" / "YOUR TEAM." fit a 320px phone */
+  .hero__name {
+    font-size: 15vw;
+  }
+  .dispatch__title {
+    font-size: 11vw;
+  }
+  .h2 {
+    font-size: max(36px, 11.5vw);
+  }
+
+  /* the hero readout wraps instead of forcing the page wider on 320px phones */
+  .hero__label dd {
+    white-space: normal;
+  }
+
+  /* nothing smaller than 11px */
+  .hero__label dt,
+  .plate__row dt,
+  .gauge__label,
+  .gauge__unit,
+  .print__meta,
+  .print__again,
+  .entry__state,
+  .label__field,
+  .chip {
+    font-size: 11px;
+  }
+  .label__code {
+    font-size: 10px;
+  }
+
+  /* tap targets ≥ 40px */
+  .print__again {
+    padding: 10px 12px;
+  }
+  .email__hint a {
+    display: inline-block;
+    padding: 10px 0;
+  }
+  .footer__top {
+    padding: 12px 0;
+  }
+
+  /* bench list: note under the title instead of colliding with it */
+  .bench a {
+    grid-template-columns: minmax(0, 1fr) 24px;
+    gap: 2px 12px;
+    padding: 14px 0;
+  }
+  .bench__note {
+    grid-row: 2;
+  }
+  .bench a > :last-child {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
+  .units {
+    gap: 48px;
+  }
+  .bench {
+    margin-top: 48px;
+  }
+  .footer {
+    margin-top: 48px;
   }
 }
 

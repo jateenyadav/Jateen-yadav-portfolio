@@ -1,0 +1,35 @@
+/* Not part of the original design: only places the shared theme switcher.
+   Bottom-left, so the original back-to-top button keeps its bottom-right corner. */
+.tsw {
+  right: auto;
+  left: max(16px, env(safe-area-inset-left));
+  justify-items: start;
+  --tsw-bg: #1a1a2e;
+  --tsw-accent: #667eea;
+}
+
+.tsw__panel {
+  transform-origin: 0 100%;
+}
+
+/* Phone fix (approved by Jateen, 2026-11-05). On screens under 600px the original
+   bar (logo + switch + Resume + Hire Me + ☰) is wider than the phone, which pushed
+   Hire Me and the ☰ button off-screen. There, Resume and Hire Me move into the ☰
+   menu, keeping their original button styles. Wider screens are unchanged. */
+.nav-menu-actions {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-actions .resume-btn,
+  .nav-actions .hire-me-btn {
+    display: none;
+  }
+
+  .nav-menu-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem 0;
+  }
+}

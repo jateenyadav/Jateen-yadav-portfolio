@@ -34,13 +34,19 @@ export function destroySmoothScroll() {
 
 export const getLenis = () => lenis
 
-export function scrollToTarget(target: string | number) {
+/** `offset` is added to the target position (negative = stop above it, e.g. under a fixed nav). */
+export function scrollToTarget(target: string | number, offset = 0) {
   if (lenis) {
-    lenis.scrollTo(target, { duration: 1.6, easing: (t: number) => 1 - Math.pow(1 - t, 4) })
+    lenis.scrollTo(target, { offset, duration: 1.6, easing: (t: number) => 1 - Math.pow(1 - t, 4) })
     return
   }
-  if (typeof target === 'number') window.scrollTo({ top: target })
-  else document.querySelector(target)?.scrollIntoView()
+  const behavior: ScrollBehavior = prefersReducedMotion() ? 'auto' : 'smooth'
+  if (typeof target === 'number') {
+    window.scrollTo({ top: target + offset, behavior })
+    return
+  }
+  const el = document.querySelector(target)
+  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + offset, behavior })
 }
 
 export { gsap, ScrollTrigger, SplitText, useGSAP }

@@ -1,0 +1,221 @@
+/* Shared chrome that exists in every theme: loading state, error, theme switcher.
+   Themes restyle the switcher by overriding the --tsw-* variables on .tsw. */
+
+.theme-loading {
+  min-height: 100svh;
+}
+
+.theme-error {
+  margin: 0;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  font: 16px/1.5 system-ui, sans-serif;
+  text-align: center;
+}
+
+.tsw {
+  --tsw-bg: #141413;
+  --tsw-fg: #f4f2ec;
+  --tsw-muted: rgba(244, 242, 236, 0.62);
+  --tsw-line: rgba(244, 242, 236, 0.14);
+  --tsw-accent: #ff4f1a;
+  --tsw-radius: 999px;
+  --tsw-panel-radius: 16px;
+  --tsw-font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --tsw-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 900;
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  font-family: var(--tsw-font);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tsw__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px 0 12px;
+  border: 1px solid var(--tsw-line);
+  border-radius: var(--tsw-radius);
+  background: var(--tsw-bg);
+  color: var(--tsw-fg);
+  box-shadow: var(--tsw-shadow);
+  font: 600 13px/1 var(--tsw-font);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), width 0.25s, padding 0.25s;
+}
+
+.tsw__btn:hover {
+  transform: translateY(-2px);
+}
+
+.tsw__btn:focus-visible,
+.tsw__opt:focus-visible {
+  outline: 2px solid var(--tsw-accent);
+  outline-offset: 2px;
+}
+
+/* two overlapping tiles: "one site, many skins" */
+.tsw__icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+}
+
+.tsw__icon::before,
+.tsw__icon::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.tsw__icon::before {
+  left: 0;
+  top: 0;
+  background: var(--tsw-fg);
+}
+
+.tsw__icon::after {
+  right: 0;
+  bottom: 0;
+  background: var(--tsw-accent);
+  box-shadow: 0 0 0 2px var(--tsw-bg);
+}
+
+.tsw__current {
+  color: var(--tsw-muted);
+  font-weight: 500;
+}
+
+.tsw__current::before {
+  content: '·';
+  margin-right: 8px;
+}
+
+.tsw__panel {
+  width: min(300px, calc(100vw - 32px));
+  padding: 8px;
+  border: 1px solid var(--tsw-line);
+  border-radius: var(--tsw-panel-radius);
+  background: var(--tsw-bg);
+  color: var(--tsw-fg);
+  box-shadow: var(--tsw-shadow);
+  animation: tsw-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: 100% 100%;
+}
+
+@keyframes tsw-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+}
+
+.tsw__title {
+  margin: 4px 10px 8px;
+  color: var(--tsw-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tsw__opt {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: calc(var(--tsw-panel-radius) - 6px);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tsw__opt:hover,
+.tsw__opt[aria-checked='true'] {
+  background: var(--tsw-line);
+}
+
+/* a 2×2 tile of the theme's palette */
+.tsw__swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  background: conic-gradient(var(--s1) 0 25%, var(--s2) 0 50%, var(--s1) 0 75%, var(--s3) 0);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.tsw__text {
+  display: grid;
+  gap: 2px;
+}
+
+.tsw__name {
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.tsw__tag {
+  color: var(--tsw-muted);
+  font-size: 12.5px;
+  line-height: 1.3;
+}
+
+.tsw__check {
+  color: var(--tsw-accent);
+  font-weight: 700;
+}
+
+/* phones: "Theme" says what the button does; the panel shows which one is on */
+@media (max-width: 480px) {
+  .tsw__current {
+    display: none;
+  }
+}
+
+.tsw[data-compact] .tsw__label,
+.tsw[data-compact] .tsw__current {
+  display: none;
+}
+
+.tsw[data-compact] .tsw__btn {
+  width: 44px;
+  padding: 0;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tsw__panel {
+    animation: none;
+  }
+}
+
+@media print {
+  .tsw {
+    display: none;
+  }
+}
+
+/* Theme change = circular reveal from the switcher (driven from ThemeRoot). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

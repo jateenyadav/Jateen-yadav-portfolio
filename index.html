@@ -9,6 +9,27 @@
       content="Jateen Yadav — full-stack engineer (3+ yrs at Hitachi) building real-time web dashboards, Flutter mobile apps, Electron desktop apps and AI features with AWS Bedrock, MCP and RAG. Based in Gurugram, India."
     />
     <meta name="theme-color" content="#efede6" />
+    <script>
+      // Paint the visitor's theme colour before any JS arrives (ids + colours mirror src/theme/registry.ts).
+      ;(function () {
+        try {
+          var bg = { assembly: '#efede6', chess: '#0f0f17' }
+          var t = new URLSearchParams(location.search).get('theme')
+          if (!bg[t]) t = localStorage.getItem('jy-theme')
+          if (!bg[t]) t = 'assembly'
+          var colour = bg[t]
+          if (t === 'chess') {
+            // the chess skin has its own dark/light switch (key "theme", system preference by default)
+            var mode = localStorage.getItem('theme')
+            if (mode === 'light' || (!mode && matchMedia('(prefers-color-scheme: light)').matches)) colour = '#f4f5fb'
+          }
+          var root = document.documentElement
+          root.setAttribute('data-skin', t)
+          root.style.backgroundColor = colour
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', colour)
+        } catch (e) {}
+      })()
+    </script>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
@@ -28,7 +49,7 @@
         "name": "Jateen Yadav",
         "jobTitle": "Full Stack Developer",
         "address": { "@type": "PostalAddress", "addressLocality": "Gurugram", "addressCountry": "IN" },
-        "sameAs": ["https://github.com/jateenyadav", "https://linkedin.com/in/jateen-yadav"],
+        "sameAs": ["https://github.com/jateenyadav", "https://www.linkedin.com/in/jateen-yadav"],
         "knowsAbout": ["React", "TypeScript", "Node.js", "Flutter", "Three.js", "AWS Bedrock", "MCP", "RAG"]
       }
     </script>

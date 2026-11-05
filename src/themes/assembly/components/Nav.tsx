@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { gsap, useGSAP, ScrollTrigger, scrollToTarget } from '../lib/motion'
-import { profile } from '../data/content'
-import Magnetic from './Magnetic'
+import { gsap, useGSAP, ScrollTrigger, scrollToTarget } from '../../../lib/motion'
+import { profile } from '../../../data/content'
+import Magnetic from '../../../shared/Magnetic'
 
 export default function Nav() {
   const nav = useRef<HTMLElement>(null)

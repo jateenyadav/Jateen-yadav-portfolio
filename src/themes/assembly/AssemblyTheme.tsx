@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ScrollTrigger, initSmoothScroll, destroySmoothScroll } from './lib/motion'
+import { ScrollTrigger, initSmoothScroll, destroySmoothScroll } from '../../lib/motion'
 import Cursor from './components/Cursor'
 import Nav from './components/Nav'
 import Rail from './components/Rail'

@@ -1,0 +1,102 @@
+:root {
+  --accent-start: #667eea;
+  --accent-end: #764ba2;
+  --accent-gradient: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Dark theme (default) */
+:root,
+[data-theme='dark'] {
+  --bg-page: #0f0f17;
+  --bg-elevated: rgba(255, 255, 255, 0.05);
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+  --nav-bg: rgba(15, 15, 23, 0.95);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --icon-filter: brightness(0) invert(1);
+}
+
+/* Light theme overrides */
+[data-theme='light'] {
+  --bg-page: #f4f5fb;
+  --bg-elevated: rgba(15, 23, 42, 0.04);
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --border-subtle: rgba(15, 23, 42, 0.1);
+  --border-strong: rgba(15, 23, 42, 0.18);
+  --text-primary: #1a1a2e;
+  --text-secondary: rgba(26, 26, 46, 0.78);
+  --text-muted: rgba(26, 26, 46, 0.55);
+  --shadow-card: 0 10px 30px rgba(100, 110, 160, 0.18);
+  --icon-filter: brightness(0) saturate(100%);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth, non-jarring theme transition */
+body,
+.navigation,
+.nav-menu,
+.nav-link,
+.resume-btn,
+.hire-me-btn,
+.theme-toggle,
+.chessboard-hero,
+.about-section,
+.experience-section,
+.projects-section,
+.contact-section,
+.footer,
+.content-card,
+.experience-card,
+.project-card,
+.skill-category,
+.education-card,
+.form-input,
+.form-textarea {
+  transition: background-color 0.35s ease, color 0.35s ease,
+    border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .navigation,
+  .nav-menu,
+  .nav-link,
+  .resume-btn,
+  .hire-me-btn,
+  .theme-toggle,
+  .chessboard-hero,
+  .about-section,
+  .experience-section,
+  .projects-section,
+  .contact-section,
+  .footer,
+  .content-card,
+  .experience-card,
+  .project-card,
+  .skill-category,
+  .education-card,
+  .form-input,
+  .form-textarea {
+    transition: none;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

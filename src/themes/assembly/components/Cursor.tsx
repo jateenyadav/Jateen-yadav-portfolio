@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gsap, isFinePointer } from '../lib/motion'
+import { gsap, isFinePointer } from '../../../lib/motion'
 
 /**
  * Registration-mark crosshair with live pixel coordinates.

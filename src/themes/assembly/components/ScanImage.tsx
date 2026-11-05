@@ -1,5 +1,5 @@
 import { useRef, useState, type ReactNode } from 'react'
-import { gsap, useGSAP, prefersReducedMotion } from '../lib/motion'
+import { gsap, useGSAP, prefersReducedMotion } from '../../../lib/motion'
 
 /** Reveals its content line by line behind an orange scan head, like a page coming out of a printer. */
 export default function ScanImage({ src, alt, children }: { src?: string; alt?: string; children?: ReactNode }) {

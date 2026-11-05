@@ -1,7 +1,18 @@
-# JY-2026 — Jateen, assembled.
+# Jateen Yadav — portfolio
 
 Portfolio of **Jateen Yadav** — Full Stack · Flutter · AI/LLM engineer.
 Live: [jateenyadav.netlify.app](https://jateenyadav.netlify.app)
+
+One site, **switchable themes** (the floating *Theme* button). Both read links, résumé and featured projects from one content file, so they stay in sync.
+
+| Theme | Idea |
+|---|---|
+| **Assembled** (default) | An assembly line × print shop — my portrait printed from my own source code. |
+| **Chess** | My original chessboard portfolio, restored exactly — same markup and the untouched original stylesheets (`src/themes/chess/styles/`), including its own dark / light switch. Only the content is refreshed. |
+
+Share a theme directly with `?theme=chess`.
+
+## Assembled
 
 The site is an **assembly line** (a nod to the real-time factory dashboards I build at Hitachi) crossed with a **print shop**. Every section is a station on the line; a unit travels down the conveyor rail as you scroll.
 
@@ -21,11 +32,26 @@ The site is an **assembly line** (a nod to the real-time factory dashboards I bu
 3. Each cell becomes a dot whose radius ∝ √coverage; rows are printed progressively behind an animated print head.
 4. `src/data/code.ts` holds ~17.5k characters pulled from my public repos (`Me-Assistant`, `Exam-AI`). Cell *i* maps to character *i*, so the loupe shows real, readable code and resolves the exact file + line.
 
+## How themes work
+
+```
+src/data/content.ts      ← all facts (projects, roles, stacks). Edit once, every theme updates.
+src/theme/registry.ts    ← list of themes (name, colours, lazy loader)
+src/theme/ThemeRoot.tsx  ← loads only the active theme, circular view-transition on switch
+src/themes/<id>/         ← a theme: its own components + one stylesheet
+```
+
+- **Code-split:** visitors download only the theme they're looking at (chess ≈ 27 kB gzip, assembled ≈ 24 kB, plus shared React).
+- **No style clashes:** each theme's CSS is imported with `?inline` and mounted only while that theme is on screen (`useThemeStyles`).
+- **No flash:** a tiny inline script in `index.html` paints the saved theme's background before any JS loads.
+- The site-level choice lives on `<html data-skin>`; the chess skin keeps its original `data-theme="dark|light"` switch.
+- The choice is remembered per device (`localStorage`), and `?theme=` links override it.
+
+**Add a theme:** create `src/themes/<id>/index.tsx` (default-export the page, call `useThemeStyles(css, '<id>')`), add an entry to `THEMES` in `registry.ts`, and add its background colour to the boot script in `index.html`.
+
 ## Stack
 
-React 19 · TypeScript · Vite · Canvas 2D · GSAP (ScrollTrigger, SplitText) · Lenis. No WebGL needed — the main bundle is ~141 kB gzip.
-
-Respects `prefers-reduced-motion` (portrait prints instantly, no smooth scroll, logs shown in full).
+React 19 · TypeScript · Vite · Canvas 2D · GSAP (ScrollTrigger, SplitText) · Lenis · View Transitions API.
 
 ## Run it
 
@@ -38,4 +64,4 @@ npm run shots     # refresh project screenshots (Playwright)
 
 ## Edit content
 
-All copy lives in [`src/data/content.ts`](src/data/content.ts). Swap `public/portrait.jpg` for a new photo (square, plain light background works best).
+Shared facts (email, links, résumé, projects) live in [`src/data/content.ts`](src/data/content.ts). The chess theme's longer copy (experience write-ups, skills, certificates) lives in `src/themes/chess/ChessboardHero.tsx`, as in the original site. Swap `public/portrait.jpg` for a new photo (square, plain light background works best).

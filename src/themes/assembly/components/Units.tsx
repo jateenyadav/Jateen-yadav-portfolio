@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { gsap, useGSAP, prefersReducedMotion } from '../lib/motion'
-import { archive, profile, projects, type Project } from '../data/content'
+import { gsap, useGSAP, prefersReducedMotion } from '../../../lib/motion'
+import { archive, profile, projects, type Project } from '../../../data/content'
 import Barcode from './Barcode'
-import Magnetic from './Magnetic'
+import Magnetic from '../../../shared/Magnetic'
 import ScanImage from './ScanImage'
 import StationBar from './StationBar'
 
@@ -115,7 +115,7 @@ export default function Units() {
         gsap.from(label.children, { opacity: 0, y: 16, duration: 0.5, ease: 'power3.out', stagger: 0.05, scrollTrigger: { trigger: label, start: 'top 80%' } })
         const stamp = label.querySelector('.stamp')
         if (stamp) {
-          gsap.from(stamp, { scale: 2.4, opacity: 0, rotate: -24, duration: 0.35, ease: 'back.out(2)', delay: 0.5, scrollTrigger: { trigger: label, start: 'top 80%' } })
+          gsap.from(stamp, { scale: 1.8, opacity: 0, rotate: -24, duration: 0.35, ease: 'back.out(2)', delay: 0.5, scrollTrigger: { trigger: label, start: 'top 80%' } })
         }
       })
     },

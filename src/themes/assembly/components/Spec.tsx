@@ -1,6 +1,7 @@
 import { useRef } from 'react'
-import { gsap, useGSAP, prefersReducedMotion } from '../lib/motion'
-import { profile, spec, statement, stats } from '../data/content'
+import { gsap, useGSAP, prefersReducedMotion } from '../../../lib/motion'
+import { profile, spec, statement, stats } from '../../../data/content'
+import Dotted from '../../../shared/Dotted'
 import Barcode from './Barcode'
 import StationBar from './StationBar'
 
@@ -73,7 +74,9 @@ export default function Spec() {
             {spec.map(([k, v]) => (
               <div className="plate__row" key={k}>
                 <dt className="mono">{k}</dt>
-                <dd>{v}</dd>
+                <dd>
+                  <Dotted text={v} />
+                </dd>
               </div>
             ))}
           </dl>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap, useGSAP, ScrollTrigger, scrollToTarget } from '../lib/motion'
-import { stations } from '../data/content'
+import { gsap, useGSAP, ScrollTrigger, scrollToTarget } from '../../../lib/motion'
+import { stations } from '../../../data/content'
 
 /**
  * The assembly line: a fixed conveyor on the left edge. The belt runs exactly

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { codeSegments, codeStream } from '../data/code'
-import { prefersReducedMotion } from '../lib/motion'
+import { codeSegments, codeStream } from '../../../data/code'
+import { prefersReducedMotion } from '../../../lib/motion'
 
 /*
   Station 00 — the print head.
