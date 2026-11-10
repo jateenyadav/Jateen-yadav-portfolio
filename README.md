@@ -3,6 +3,10 @@
 Portfolio of **Jateen Yadav** — Full Stack · Flutter · AI/LLM engineer.
 Live: [jateenyadav.netlify.app](https://jateenyadav.netlify.app)
 
+[![Portfolio demo: the portrait prints from real code, stations scroll past, then the switch to the Chess theme](docs/demo.gif)](docs/demo.mp4)
+
+▶ [Watch the full 21-second demo with sound](docs/demo.mp4)
+
 One site, **switchable themes** (the floating *Theme* button). Both read links, résumé and featured projects from one content file, so they stay in sync.
 
 | Theme | Idea |
