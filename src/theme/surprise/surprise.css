@@ -1,0 +1,194 @@
+/* Surprise themes — restyles the Assembled skin through its tokens.
+   Every rule is scoped to html[data-skin='assembly'][data-surprise], so it does nothing unless a
+   surprise is on. assembly.css is untouched; the rules below re-declare its few hard-coded colours
+   with generated tokens. Screen only: printing uses the original look. */
+
+@property --sx-dot {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@media screen {
+  /* ---------------------------------------------- hard-coded colours of assembly.css */
+  html[data-skin='assembly'][data-surprise] body {
+    background-image: none; /* the moving pattern layer replaces the dot grid */
+  }
+  html[data-skin='assembly'][data-surprise] .nav {
+    background: var(--sx-glass);
+  }
+  html[data-skin='assembly'][data-surprise] .stn__state i {
+    box-shadow: 0 0 0 3px var(--sx-ok-18);
+  }
+  html[data-skin='assembly'][data-surprise] .rail__stn.is-active .rail__led {
+    box-shadow: 0 0 0 4px var(--sx-accent-22);
+  }
+  html[data-skin='assembly'][data-surprise] .xhair.is-hover .xhair__ring {
+    background: var(--sx-accent-10);
+  }
+  html[data-skin='assembly'][data-surprise] .print__sheet {
+    box-shadow: 0 1px 0 var(--rule), 0 30px 60px -30px var(--sx-shadow-35);
+  }
+  html[data-skin='assembly'][data-surprise] .mod.is-running .mod__led {
+    box-shadow: 0 0 0 4px var(--sx-ok-20);
+  }
+  html[data-skin='assembly'][data-surprise] .mod__log {
+    color: var(--sx-log);
+  }
+  html[data-skin='assembly'][data-surprise] .scan__head {
+    box-shadow: 0 0 18px 4px var(--sx-accent-45);
+  }
+  html[data-skin='assembly'][data-surprise] .phone {
+    box-shadow: 18px 22px 0 -4px var(--sx-shadow-18);
+  }
+  html[data-skin='assembly'][data-surprise] .paper {
+    background: var(--sx-logpaper);
+    box-shadow: 0 30px 60px -36px var(--sx-shadow-45);
+  }
+  html[data-skin='assembly'][data-surprise] .entry:nth-child(even) {
+    background: var(--sx-ledger);
+  }
+  html[data-skin='assembly'][data-surprise] .slot span {
+    background: var(--sx-slot);
+  }
+  html[data-skin='assembly'][data-surprise] .receipt {
+    background: var(--sx-receipt);
+    box-shadow: 0 24px 40px -28px var(--sx-shadow-50);
+  }
+  html[data-skin='assembly'][data-surprise] .tsw {
+    --tsw-shadow: 6px 6px 0 var(--sx-shadow-18);
+    --tsw-muted: var(--sx-tsw-muted);
+    --tsw-line: var(--sx-tsw-line);
+  }
+
+  /* Outlined second line of the name. Many variable fonts have overlapping contours that a plain
+     text-stroke draws as seams; stroking behind a paper-coloured fill hides them. Stroke is doubled
+     because the fill covers its inner half. */
+  html[data-skin='assembly'][data-surprise] .hero__name .block:last-child {
+    color: var(--paper);
+    -webkit-text-stroke: 4px var(--ink);
+    paint-order: stroke fill;
+  }
+
+  /* ---------------------------------------------- text on the accent colour */
+  html[data-skin='assembly'][data-surprise] ::selection {
+    color: var(--sx-on-accent);
+  }
+  html[data-skin='assembly'][data-surprise] .nav__mark:hover,
+  html[data-skin='assembly'][data-surprise] .xhair.is-hover .xhair__label,
+  html[data-skin='assembly'][data-surprise] .btn--ink:hover,
+  html[data-skin='assembly'][data-surprise] .btn--accent:not(:hover),
+  html[data-skin='assembly'][data-surprise] .phone__card--accent,
+  html[data-skin='assembly'][data-surprise] .email:hover {
+    color: var(--sx-on-accent);
+  }
+
+  /* ---------------------------------------------- dark tones */
+  html[data-skin='assembly'][data-surprise][data-sx-tone='dark'] .stamp {
+    mix-blend-mode: normal;
+  }
+  /* The portrait stays a light print with dark dots (a photo on a dark desk);
+     light dots on dark paper would print a negative. */
+  html[data-skin='assembly'][data-surprise][data-sx-tone='dark'] .print__sheet {
+    --ink: var(--sx-print-ink);
+    --paper: var(--sx-print-paper);
+    --sheet: var(--sx-print-paper);
+    --rule: var(--sx-print-rule);
+  }
+  /* crop and registration marks sit outside the sheet, on the page: they keep the page ink */
+  html[data-skin='assembly'][data-surprise][data-sx-tone='dark'] .print__sheet :is(.crop, .reg) {
+    --ink: var(--sx-page-ink);
+  }
+
+  /* ---------------------------------------------- moving background pattern */
+  html[data-skin='assembly'][data-surprise]::before {
+    content: '';
+    position: fixed;
+    inset: -64px;
+    z-index: -1;
+    pointer-events: none;
+    background-image: var(--sx-pat-img);
+    background-size: var(--sx-tw) var(--sx-th);
+    will-change: transform;
+    animation: sx-drift var(--sx-pat-dur) linear infinite;
+  }
+
+  /* ---------------------------------------------- hover styles (independent transforms only) */
+  @media (hover: hover) and (pointer: fine) {
+    html[data-skin='assembly'][data-surprise] .btn {
+      transition:
+        color 0.35s var(--ease),
+        translate 0.3s var(--ease),
+        rotate 0.3s var(--ease),
+        scale 0.3s var(--ease),
+        box-shadow 0.3s var(--ease);
+    }
+    html[data-skin='assembly'][data-surprise] :is(.unit__visual, .nav__mark, .print__again, .email) {
+      transition:
+        translate 0.3s var(--ease),
+        rotate 0.3s var(--ease),
+        scale 0.3s var(--ease),
+        box-shadow 0.3s var(--ease);
+    }
+    html[data-skin='assembly'][data-surprise][data-sx-hover='lift'] :is(.btn, .unit__visual, .nav__mark, .print__again:not(:disabled), .email):hover {
+      translate: 0 -3px;
+      box-shadow: 4px 4px 0 var(--accent);
+    }
+    html[data-skin='assembly'][data-surprise][data-sx-hover='tilt'] :is(.btn, .unit__visual, .nav__mark, .print__again:not(:disabled), .email):hover {
+      rotate: -1.2deg;
+      scale: 1.015;
+    }
+    html[data-skin='assembly'][data-surprise][data-sx-hover='glow'] :is(.btn, .unit__visual, .nav__mark, .print__again:not(:disabled), .email):hover {
+      box-shadow:
+        0 0 0 2px var(--sx-accent-45),
+        0 12px 32px -6px var(--sx-accent-45);
+    }
+    html[data-skin='assembly'][data-surprise][data-sx-hover='wobble'] :is(.btn, .unit__visual, .nav__mark, .print__again:not(:disabled), .email):hover {
+      animation: sx-wobble 0.5s var(--ease) 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html[data-skin='assembly'][data-surprise] :is(.btn, .unit__visual, .nav__mark, .print__again, .email):hover {
+      translate: none;
+      rotate: none;
+      scale: none;
+      animation: none;
+    }
+  }
+}
+
+@keyframes sx-drift {
+  to {
+    transform: translate3d(var(--sx-mx), var(--sx-my), 0);
+  }
+}
+
+@keyframes sx-wobble {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -2deg;
+  }
+  50% {
+    rotate: 1.5deg;
+  }
+  75% {
+    rotate: -0.8deg;
+  }
+}
+
+/* ---------------------------------------------- halftone switch effect */
+html[data-sx-fx='halftone']::view-transition-new(root) {
+  -webkit-mask: radial-gradient(circle, #000 var(--sx-dot), #0000 calc(var(--sx-dot) + 0.5px)) 0 0 / 20px 20px;
+  mask: radial-gradient(circle, #000 var(--sx-dot), #0000 calc(var(--sx-dot) + 0.5px)) 0 0 / 20px 20px;
+  animation: sx-halftone 0.9s steps(12) both;
+}
+
+@keyframes sx-halftone {
+  to {
+    --sx-dot: 15px;
+  }
+}

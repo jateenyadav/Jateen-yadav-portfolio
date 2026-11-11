@@ -219,3 +219,60 @@
   animation: none;
   mix-blend-mode: normal;
 }
+
+/* ------------------------------------------------ New look */
+.tsw__row {
+  display: flex;
+  gap: 8px;
+}
+
+/* Chess places the switcher bottom-left: there the New look button sits on the outer side too. */
+.tsw__btn--look {
+  padding: 0 16px 0 13px;
+}
+
+.tsw__spark {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.tsw__now {
+  margin: 8px 10px 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--tsw-line);
+  color: var(--tsw-muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.tsw__now strong {
+  color: var(--tsw-fg);
+  font-weight: 650;
+}
+
+.tsw[data-compact] .tsw__btn--look {
+  width: 44px;
+  padding: 0;
+  justify-content: center;
+}
+
+/* long surprise names are cut with an ellipsis (phones hide the name entirely, see above) */
+@media (min-width: 481px) {
+  .tsw:not([data-compact]) .tsw__current {
+    display: inline-block;
+    max-width: 34vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.tsw__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

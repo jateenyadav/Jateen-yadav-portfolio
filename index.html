@@ -15,6 +15,7 @@
         try {
           var bg = { assembly: '#efede6', chess: '#0f0f17' }
           var t = new URLSearchParams(location.search).get('theme')
+          var fromUrl = !!bg[t]
           if (!bg[t]) t = localStorage.getItem('jy-theme')
           if (!bg[t]) t = 'assembly'
           var colour = bg[t]
@@ -22,6 +23,11 @@
             // the chess skin has its own dark/light switch (key "theme", system preference by default)
             var mode = localStorage.getItem('theme')
             if (mode === 'light' || (!mode && matchMedia('(prefers-color-scheme: light)').matches)) colour = '#f4f5fb'
+          }
+          if (t === 'assembly' && !fromUrl) {
+            // a saved "Surprise me" look paints its own paper colour (see src/theme/surprise/dom.ts)
+            var sx = localStorage.getItem('jy-surprise-bg')
+            if (sx && /^#[0-9a-f]{6}$/i.test(sx)) colour = sx
           }
           var root = document.documentElement
           root.setAttribute('data-skin', t)

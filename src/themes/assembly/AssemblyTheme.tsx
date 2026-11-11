@@ -17,8 +17,12 @@ export default function App() {
     const refresh = () => ScrollTrigger.refresh()
     document.fonts?.ready.then(refresh)
     window.addEventListener('load', refresh)
+    // a surprise theme swaps fonts, which can change section heights
+    const onSurprise = () => requestAnimationFrame(refresh)
+    window.addEventListener('jy:surprise', onSurprise)
     return () => {
       window.removeEventListener('load', refresh)
+      window.removeEventListener('jy:surprise', onSurprise)
       destroySmoothScroll()
     }
   }, [])

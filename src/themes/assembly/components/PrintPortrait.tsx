@@ -11,9 +11,27 @@ import { prefersReducedMotion } from '../../../lib/motion'
   dots into those characters and names the file + line it is reading.
 */
 
+// Original colours — also the fallback when the page's tokens can't be read.
 const INK = '#141413'
 const PAPER = '#efede6'
 const ACCENT = '#ff4f1a'
+
+const triplet = (hex: string) => {
+  const n = parseInt(hex.slice(1), 16)
+  return `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`
+}
+
+/** Ink/paper/accent as the page currently styles this element (surprise themes change them). */
+function readPalette(el: Element) {
+  const cs = getComputedStyle(el)
+  const get = (name: string, fallback: string) => {
+    const v = cs.getPropertyValue(name).trim()
+    return /^#[0-9a-f]{6}$/i.test(v) ? v : fallback
+  }
+  const ink = get('--ink', INK)
+  const accent = get('--accent', ACCENT)
+  return { ink, paper: get('--paper', PAPER), accent, inkRgb: triplet(ink), accentRgb: triplet(accent) }
+}
 const PRINT_MS = 3400
 
 const pad = (n: number, w = 3) => String(n).padStart(w, '0')
@@ -72,6 +90,7 @@ export default function PrintPortrait({ src }: { src: string }) {
     let startAt = 0
     let disposed = false
     const lens = { x: 0, y: 0, on: false }
+    let pal = readPalette(wrap)
     const len = codeStream.length
 
     const layout = () => {
@@ -123,7 +142,7 @@ export default function PrintPortrait({ src }: { src: string }) {
     }
 
     const printRow = (r: number) => {
-      dctx.fillStyle = INK
+      dctx.fillStyle = pal.ink
       dctx.beginPath()
       for (let c = 0; c < cols; c++) {
         const d = dark[r * cols + c]
@@ -150,7 +169,7 @@ export default function PrintPortrait({ src }: { src: string }) {
       ctx.beginPath()
       ctx.arc(lx, ly, R, 0, Math.PI * 2)
       ctx.clip()
-      ctx.fillStyle = PAPER
+      ctx.fillStyle = pal.paper
       ctx.fillRect(lx - R, ly - R, R * 2, R * 2)
 
       const sr = R / Z
@@ -170,14 +189,14 @@ export default function PrintPortrait({ src }: { src: string }) {
           const sx = c * cell + cell / 2
           const sy = r * cell + cell / 2
           const a = d < 0.035 ? 0.1 : 0.22 + 0.78 * d
-          ctx.fillStyle = d < 0.035 ? `rgba(20,20,19,${a})` : `rgba(20,20,19,${a.toFixed(2)})`
+          ctx.fillStyle = d < 0.035 ? `rgba(${pal.inkRgb},${a})` : `rgba(${pal.inkRgb},${a.toFixed(2)})`
           ctx.fillText(ch, lx + (sx - lx) * Z, ly + (sy - ly) * Z)
         }
       }
       ctx.restore()
 
       // loupe ring + registration ticks
-      ctx.strokeStyle = ACCENT
+      ctx.strokeStyle = pal.accent
       ctx.lineWidth = 1.5
       ctx.beginPath()
       ctx.arc(lx, ly, R, 0, Math.PI * 2)
@@ -201,11 +220,11 @@ export default function PrintPortrait({ src }: { src: string }) {
       if (head >= 0) {
         const y = Math.min(size, head * cell + cell / 2)
         const g = ctx.createLinearGradient(0, y - 36, 0, y)
-        g.addColorStop(0, 'rgba(255,79,26,0)')
-        g.addColorStop(1, 'rgba(255,79,26,0.16)')
+        g.addColorStop(0, `rgba(${pal.accentRgb},0)`)
+        g.addColorStop(1, `rgba(${pal.accentRgb},0.16)`)
         ctx.fillStyle = g
         ctx.fillRect(0, y - 36, size, 36)
-        ctx.fillStyle = ACCENT
+        ctx.fillStyle = pal.accent
         ctx.fillRect(0, y - 1, size, 2)
         // carriage
         const cx = ((performance.now() / 3) % (size + 40)) - 20
@@ -275,6 +294,16 @@ export default function PrintPortrait({ src }: { src: string }) {
       requestRender()
     }
 
+    // a surprise theme changed the colours: reprint what is already on the sheet in the new ink
+    const onSurprise = () => {
+      pal = readPalette(wrap)
+      if (cols) {
+        reprintAll()
+        requestRender()
+      }
+    }
+    window.addEventListener('jy:surprise', onSurprise)
+
     const ro = new ResizeObserver(() => {
       if (!img.complete || !cols) return
       const before = size
@@ -301,6 +330,7 @@ export default function PrintPortrait({ src }: { src: string }) {
       el.removeEventListener('pointermove', onMove)
       el.removeEventListener('pointerdown', onMove)
       el.removeEventListener('pointerleave', onLeave)
+      window.removeEventListener('jy:surprise', onSurprise)
       ro.disconnect()
     }
   }, [src, run])
