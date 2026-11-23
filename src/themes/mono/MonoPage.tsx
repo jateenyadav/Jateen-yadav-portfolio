@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { archive, experience, modules, profile, projects, statement, type Project } from '../../data/content'
 import { gsap, ScrollTrigger, useGSAP, initSmoothScroll, destroySmoothScroll, scrollToTarget, prefersReducedMotion } from '../../lib/motion'
 import Crowd from './Crowd'
+import ProjectMedia from '../../shared/ProjectMedia'
 
 const MODE_KEY = 'jy-mono-mode'
 const INTRO_KEY = 'jy-mono-intro'
@@ -179,7 +180,7 @@ function LifeOSArt() {
 }
 
 function Shot({ p }: { p: Project }) {
-  return p.image ? <img src={p.image} alt="" loading="lazy" /> : <LifeOSArt />
+  return p.video || p.image ? <ProjectMedia p={p} alt="" /> : <LifeOSArt />
 }
 
 function ProjectText({ p, i }: { p: Project; i: number }) {
@@ -584,16 +585,30 @@ export default function MonoPage() {
         const n = projects.length
         let a = -1
         let b = -1
+        // only the card on show plays its demo; the stacked ones stay paused
+        const inView = (el: HTMLElement) => {
+          const r = el.getBoundingClientRect()
+          return r.bottom > 0 && r.top < window.innerHeight
+        }
+        const media = (list: HTMLElement[], on: number) =>
+          list.forEach((s, i) => {
+            const v = s.querySelector('video')
+            if (!v) return
+            if (i === on && inView(v)) v.play().catch(() => {})
+            else v.pause()
+          })
         const sync = () => {
           const rot = Number(gsap.getProperty(body, 'rotationY')) || 0
           const na = Math.min(n - 1, 2 * Math.round(rot / 360))
           const nb = Math.min(n - 1, 2 * Math.floor((rot + 90) / 360) + 1)
           if (na !== a) {
             shotsA.forEach((s, i) => s.classList.toggle('is-on', i === na))
+            media(shotsA, na)
             a = na
           }
           if (nb !== b) {
             shotsB.forEach((s, i) => s.classList.toggle('is-on', i === nb))
+            media(shotsB, nb)
             b = nb
           }
         }

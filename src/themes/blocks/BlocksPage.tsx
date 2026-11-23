@@ -5,6 +5,11 @@ import { hasWebGL } from '../../shared/stage'
 import type { BlocksScene } from './scene'
 import { SHOP_COLORS, SPOTS, STOPS } from './spots'
 
+// the island has one building per project stop; any newer project joins the "Smaller builds" card
+const TOURED = projects.filter((p) => SPOTS.some((s) => s.key === p.id))
+const EXTRA = projects.filter((p) => !TOURED.includes(p))
+import ProjectMedia from '../../shared/ProjectMedia'
+
 const LANDMARK: Record<string, string> = { lifeos: 'The house', examace: 'The school', solar: 'The observatory', client: 'The gallery' }
 const ROOF: Record<string, string> = { lifeos: '#ff6b4a', examace: '#f3c55a', solar: '#7f8bab', client: '#2d3240' }
 
@@ -365,7 +370,7 @@ export default function BlocksPage() {
           </article>
         </section>
 
-        {projects.map((p, i) => (
+        {TOURED.map((p, i) => (
           <section className="bk-sec" id={`bk-${p.id}`} data-stop={3 + i} key={p.id}>
             <article
               className="bk-card bk-card--project"
@@ -382,7 +387,7 @@ export default function BlocksPage() {
               <p className="bk-muted">
                 {p.kind} — {p.status}
               </p>
-              <div className="bk-shot">{p.image ? <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" /> : <LifeosMock />}</div>
+              <div className="bk-shot">{p.video || p.image ? <ProjectMedia p={p} /> : <LifeosMock />}</div>
               <p className="bk-summary">{p.summary}</p>
               <ul className="bk-points">
                 {p.points.map((x) => (
@@ -406,6 +411,14 @@ export default function BlocksPage() {
               <aside className="bk-card bk-card--more" data-side="left" style={{ ['--roof' as string]: '#7dc66a' }}>
                 <h3>Smaller builds</h3>
                 <ul>
+                  {EXTRA.map((x) => (
+                    <li key={x.id}>
+                      <a href={x.links[0].href} target="_blank" rel="noreferrer">
+                        {x.title}
+                      </a>
+                      <span>{x.kind}</span>
+                    </li>
+                  ))}
                   {archive.map((a) => (
                     <li key={a.title}>
                       <a href={a.href} target="_blank" rel="noreferrer">

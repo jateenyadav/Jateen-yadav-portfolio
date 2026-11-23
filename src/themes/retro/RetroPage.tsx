@@ -4,6 +4,7 @@ import { gsap, ScrollTrigger, useGSAP, initSmoothScroll, destroySmoothScroll, sc
 import { hasWebGL } from '../../shared/stage'
 import type { RetroScene } from './scene'
 import { PROMPT, Terminal, type Line, type Phosphor } from './terminal'
+import ProjectMedia from '../../shared/ProjectMedia'
 
 /** Section → the command the terminal runs when you scroll to it. */
 const SECTIONS = [
@@ -435,7 +436,7 @@ export default function RetroPage() {
                   </p>
                   <div className="rt-print">
                     {p.image ? (
-                      <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" />
+                      <ProjectMedia p={p} />
                     ) : (
                       <div className="rt-lifeos" aria-hidden="true">
                         <div>

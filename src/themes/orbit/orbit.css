@@ -711,7 +711,8 @@ main {
   pointer-events: none;
 }
 
-.o-proj__img img {
+.o-proj__img img,
+.o-proj__img video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -720,7 +721,8 @@ main {
   transition: transform 0.9s var(--ease);
 }
 
-.o-proj:hover .o-proj__img img {
+.o-proj:hover .o-proj__img img,
+.o-proj:hover .o-proj__img video {
   transform: scale(1.035);
 }
 

@@ -4,6 +4,7 @@ import { gsap, ScrollTrigger, useGSAP, initSmoothScroll, destroySmoothScroll, sc
 import { hasWebGL } from '../../shared/stage'
 import { FORMATIONS } from './formations'
 import type { FlowScene } from './scene'
+import ProjectMedia from '../../shared/ProjectMedia'
 
 const NAV = [
   { label: 'About', to: '#fl-about' },
@@ -306,7 +307,7 @@ export default function FlowPage() {
                 <div className="fl-proj__media fl-rv">
                   {p.image ? (
                     <a className="fl-shot" href={p.links[0].href} target="_blank" rel="noreferrer" aria-label={`${p.title} — open live site`}>
-                      <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" decoding="async" width={1200} height={750} />
+                      <ProjectMedia p={p} alt="" />
                     </a>
                   ) : (
                     <LifeCard />
@@ -328,7 +329,7 @@ export default function FlowPage() {
                 {k === projects.length - 1 && (
                   <div className="fl-archive fl-rv">
                     <p className="fl-kick">
-                      <span>03.5</span> Archive
+                      <span>03.5</span> More builds
                     </p>
                     <ul>
                       {archive.map((a) => (

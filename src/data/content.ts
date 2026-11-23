@@ -37,9 +37,11 @@ export const hero = {
 }
 
 export const ticker = [
-  'LifeOS — Google Play closed testing',
+  'LifeOS — live on web, Android in closed testing',
   'ExamAce — live on Vercel',
+  'TinyLM — a language model trained from scratch',
   '3+ yrs in production at Hitachi',
+  '7 open-source GenAI apps — RAG · agents · text-to-SQL',
   'AWS Bedrock · MCP · RAG',
   'Flutter · React · Electron — one architecture',
   'Open to new roles — 2026',
@@ -50,10 +52,10 @@ export const statement =
 
 export const spec: [string, string][] = [
   ['Operator', 'Jateen Yadav'],
-  ['Function', 'Full Stack · Flutter · AI / LLM'],
+  ['Function', 'Full Stack · Flutter · Generative AI'],
   ['In service', 'Since 2023 — Hitachi India'],
   ['Platforms', 'Web · Android · iOS · Desktop'],
-  ['AI stack', 'AWS Bedrock · MCP · RAG · Ollama'],
+  ['AI stack', 'AWS Bedrock · MCP · RAG · Agents'],
   ['Origin', 'Gurugram, India (IST)'],
   ['Works with', 'Teams in India, Japan & Europe'],
 ]
@@ -61,7 +63,7 @@ export const spec: [string, string][] = [
 // `unit` sits beside every number so all four gauges read the same way; `max` scales the bar.
 export const stats = [
   { value: 3, unit: 'yrs+', max: 5, label: 'Uptime in production' },
-  { value: 4, unit: 'apps+', max: 5, label: 'Full-stack units shipped' },
+  { value: 15, unit: 'apps+', max: 20, label: 'Products shipped' },
   { value: 4, unit: 'apps+', max: 5, label: 'Flutter on Play & TestFlight' },
   { value: 3, unit: 'OS', max: 5, label: 'Platforms from 1 architecture' },
 ]
@@ -92,7 +94,7 @@ export const modules = [
     code: 'MOD-04',
     title: 'AI / LLM',
     tagline: 'Features you can talk to',
-    stack: 'AWS Bedrock · MCP · LangChain · RAG · Ollama',
+    stack: 'AWS Bedrock · MCP · LangChain · RAG · Agents',
     log: ['> new ChatBedrockConverse({ temperature: 0.2, maxTokens: 800 })', '> mcp: token-scoped tools for AI assistants ✓', '> rag: answers cite their sources ✓'],
   },
   {
@@ -114,7 +116,10 @@ export type Project = {
   summary: string
   points: string[]
   stack: string[]
+  /** Poster frame — also the fallback when the video can't play. */
   image?: string
+  /** Real demo clip (silent, looping). */
+  video?: string
   visual?: 'phone'
   links: { label: string; href: string }[]
 }
@@ -128,16 +133,20 @@ export const projects: Project[] = [
     status: 'Live on web — Android in closed testing',
     stamp: 'Live',
     summary:
-      'One app for your whole life — notes, reminders, workouts, routines and expenses — on web, Android and iOS, with an AI assistant that reads your own data.',
+      'One app for notes, workouts, routines and money — on web, Android and iOS — with an AI assistant that can act on your own data.',
     points: [
-      'React web + shared Flutter app on one backend',
-      'Local-first AI (Ollama), optional OpenAI / Bedrock; RAG answers cite sources',
-      'Kotlin: INR payment notifications → expenses (encrypted queue, retries, dedupe)',
-      'bcrypt, hashed session tokens, rate limits, integer-paise money, tests on every layer',
+      'One Express + MongoDB API behind a React web app and a Flutter app',
+      'Bank SMS & UPI alerts parsed on the phone, deduped by UTR — khata, splits, card dues',
+      'LLM assistant with Groq → Gemini → OpenRouter fallback and tool calling',
+      'bcrypt, hashed sessions, per-account rate limits, ~475 tests in CI',
     ],
-    stack: ['React', 'Flutter', 'Kotlin', 'Node.js', 'MongoDB', 'Ollama', 'Bedrock'],
-    visual: 'phone',
-    links: [{ label: 'Live', href: 'https://lifeos-jateen.netlify.app' }],
+    stack: ['React', 'Flutter', 'Kotlin', 'Node.js', 'MongoDB', 'Groq', 'Gemini'],
+    image: '/media/lifeos.jpg',
+    video: '/media/lifeos.mp4',
+    links: [
+      { label: 'Live', href: 'https://lifeos-jateen.netlify.app' },
+      { label: 'Code', href: 'https://github.com/jateenyadav/lifeos-online' },
+    ],
   },
   {
     id: 'examace',
@@ -148,17 +157,45 @@ export const projects: Project[] = [
     stamp: 'Live',
     summary:
       'AI-generated CBSE & JEE practice papers, camera-based grading of handwritten answers, a timed anti-cheating exam mode and performance analytics.',
-    points: ['Gemini generation with automatic OpenRouter fallback', 'Photograph a handwritten answer → AI grades it', 'Anti-cheat timed mode + per-topic analytics'],
-    stack: ['Next.js 14', 'TypeScript', 'Prisma', 'Zustand', 'Gemini'],
-    image: '/shots/examace.jpg',
+    points: [
+      'Full papers generated section by section within serverless limits',
+      'Photograph a handwritten answer → Gemini vision grades it',
+      'Timed anti-cheat exam room, streamed AI tutor, spaced-repetition notebook',
+      '85+ tests in CI',
+    ],
+    stack: ['Next.js 14', 'TypeScript', 'Prisma', 'MongoDB', 'Gemini', 'Groq'],
+    image: '/media/examace.jpg',
+    video: '/media/examace.mp4',
     links: [
       { label: 'Live', href: 'https://exam-ai-tau-bay.vercel.app' },
       { label: 'Code', href: 'https://github.com/jateenyadav/Exam-AI' },
     ],
   },
   {
-    id: 'solar',
+    id: 'tinylm',
     index: '03',
+    title: 'TinyLM',
+    kind: 'A language model, trained from scratch',
+    status: 'Live — runs in your browser',
+    stamp: 'Live',
+    summary:
+      'A Llama-style language model I built end to end — own tokenizer, network and training loop — that writes short stories entirely in your browser. No server, no API key.',
+    points: [
+      'Byte-level BPE tokenizer + Llama-style network (RoPE, SwiGLU, RMSNorm)',
+      '5.8M parameters, 68M tokens, 45 min on a laptop GPU — perplexity 5.93',
+      'Exported to ONNX and 8-bit: a 7 MB model on transformers.js',
+    ],
+    stack: ['Python', 'PyTorch', 'Hugging Face', 'ONNX', 'transformers.js'],
+    image: '/media/tinylm.jpg',
+    video: '/media/tinylm.mp4',
+    links: [
+      { label: 'Live', href: 'https://tiny-lm-jateen.netlify.app' },
+      { label: 'Code', href: 'https://github.com/jateenyadav/tiny-lm' },
+    ],
+  },
+  {
+    id: 'solar',
+    index: '04',
     title: 'Solar System',
     kind: 'Interactive 3D in the browser',
     status: 'Live — Netlify',
@@ -166,7 +203,8 @@ export const projects: Project[] = [
     summary: 'A real-time Three.js solar system with Indian space missions, orbiting planets, lighting and camera controls.',
     points: ['Three.js scene graph & orbital animation', 'Textured planets, labels, orbit controls'],
     stack: ['Three.js', 'WebGL', 'JavaScript'],
-    image: '/shots/solar.jpg',
+    image: '/media/solar.jpg',
+    video: '/media/solar.mp4',
     links: [
       { label: 'Live', href: 'https://3d-solar-galaxy.netlify.app' },
       { label: 'Code', href: 'https://github.com/jateenyadav/3d-solar-system' },
@@ -174,7 +212,7 @@ export const projects: Project[] = [
   },
   {
     id: 'client',
-    index: '04',
+    index: '05',
     title: 'Client Portfolio',
     kind: 'Freelance — marketing site',
     status: 'Live — delivered to client',
@@ -183,7 +221,8 @@ export const projects: Project[] = [
       'An animated single-page portfolio designed and built end to end for a Dubai-based marketing executive — two themes, typographic hero, motion throughout.',
     points: ['Designed + developed for a real client', 'Dark / light themes with persisted preference'],
     stack: ['HTML', 'CSS', 'JavaScript'],
-    image: '/shots/client.jpg',
+    image: '/media/client.jpg',
+    video: '/media/client.mp4',
     links: [
       { label: 'Live', href: 'https://jateenyadav.github.io/client-portfolio/' },
       { label: 'Code', href: 'https://github.com/jateenyadav/client-portfolio' },
@@ -192,10 +231,14 @@ export const projects: Project[] = [
 ]
 
 export const archive = [
+  { title: 'AskDB', note: 'Plain English → SQL on in-browser Postgres', href: 'https://github.com/jateenyadav/ask-db' },
+  { title: 'GraphMind', note: 'Knowledge-graph RAG over your documents', href: 'https://github.com/jateenyadav/graph-mind' },
+  { title: 'TaskPilot', note: 'Desktop AI browser agent (Electron)', href: 'https://task-pilot-jateen.netlify.app' },
+  { title: 'MinuteMate', note: 'Whisper meeting minutes + Q&A', href: 'https://github.com/jateenyadav/minute-mate' },
+  { title: 'ReceiptLens', note: 'AI receipt reader + bill split', href: 'https://github.com/jateenyadav/receipt-lens' },
+  { title: 'Mentora', note: 'AI tutor that remembers you', href: 'https://github.com/jateenyadav/mentora' },
+  { title: 'Mohalla', note: 'Generative-agents neighbourhood', href: 'https://github.com/jateenyadav/mohalla' },
   { title: 'CryptoChecker', note: 'Real-time crypto prices', href: 'https://crypchecker.netlify.app' },
-  { title: 'Community4You', note: 'Find communities + messaging', href: 'https://community4you.netlify.app' },
-  { title: 'Find My Meal', note: 'Recipe search by ingredient', href: 'https://find-my-meal.netlify.app' },
-  { title: 'Note-Vase', note: 'Minimal vanilla-JS notes', href: 'https://github.com/jateenyadav/Note-Vase' },
 ]
 
 export const experience = [
@@ -205,11 +248,11 @@ export const experience = [
     role: 'Full Stack Developer (Junior Research Engineer)',
     company: 'Hitachi India Pvt. Ltd. (via Randstad)',
     points: [
-      'Real-time enterprise dashboards (React, Node.js, MongoDB) for overseas clients — live machine data, auth, analytics',
-      'Electron desktop + Flutter mobile apps from one shared architecture',
-      'Three.js / WebGL 3D product visualisations for client demos',
-      'AI/LLM pipelines on AWS Bedrock; backend services exposed to AI assistants via MCP',
-      'Production releases with global stakeholders, including teams in Japan and Europe',
+      'Real-time enterprise dashboards (React, Redux, Node.js, MongoDB, WebSockets) streaming live machine data to overseas clients',
+      'Electron desktop + Flutter mobile apps on one shared architecture — each fix ships once',
+      'GenAI on AWS Bedrock (LangChain, RAG); backend services exposed to AI assistants via MCP',
+      'Three.js / WebGL 3D product demos; AWS deploys (EC2, S3); code splitting + Webpack tuning',
+      'Production releases with teams in Japan and Europe',
     ],
   },
   {
@@ -245,6 +288,6 @@ export const experience = [
     state: 'BOOT',
     role: 'B.Tech, Computer Science & Engineering',
     company: 'Kurukshetra University (JMIT Radaur) · CGPA 8.43',
-    points: ['Meta Front-End Developer certificate · Mozilla JavaScript Foundations'],
+    points: ['Meta Front-End Developer certificate · Mozilla JavaScript Foundations certificate'],
   },
 ]

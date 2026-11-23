@@ -5,6 +5,7 @@ import Barcode from './Barcode'
 import Magnetic from '../../../shared/Magnetic'
 import ScanImage from './ScanImage'
 import StationBar from './StationBar'
+import ProjectMedia from '../../../shared/ProjectMedia'
 
 function PhoneMock() {
   return (
@@ -55,7 +56,7 @@ function Unit({ p }: { p: Project }) {
               <PhoneMock />
             </ScanImage>
           ) : (
-            <ScanImage src={p.image} alt={`${p.title} screenshot`} />
+            <ScanImage>{p.video || p.image ? <ProjectMedia p={p} alt={`${p.title} demo`} /> : <div className="scan__blank" />}</ScanImage>
           )}
         </a>
 
@@ -135,7 +136,7 @@ export default function Units() {
       </div>
 
       <div className="bench">
-        <div className="bench__head mono">Bench tests — early prototypes</div>
+        <div className="bench__head mono">More units — AI apps &amp; side builds</div>
         <ul>
           {archive.map((a) => (
             <li key={a.title}>

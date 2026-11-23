@@ -643,7 +643,8 @@ main {
   box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8);
 }
 
-.fl-shot img {
+.fl-shot img,
+.fl-shot video {
   display: block;
   width: 100%;
   height: 100%;
@@ -652,7 +653,8 @@ main {
   transition: transform 1s var(--ease);
 }
 
-.fl-shot:hover img {
+.fl-shot:hover img,
+.fl-shot:hover video {
   transform: scale(1.04);
 }
 

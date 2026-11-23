@@ -3,6 +3,7 @@ import { archive, experience, hero, modules, profile, projects, spec, statement,
 import { gsap, ScrollTrigger, useGSAP, initSmoothScroll, destroySmoothScroll, scrollToTarget, prefersReducedMotion } from '../../lib/motion'
 import { hasWebGL } from '../../shared/stage'
 import type { Formation, SignalScene } from './scene'
+import ProjectMedia from '../../shared/ProjectMedia'
 
 /** One formation per "channel"; the DOM block with the same data-stage index sits beside it. */
 const FORMATIONS: (Formation & { ch: string; glyph: string })[] = [
@@ -343,7 +344,7 @@ export default function SignalPage() {
                 <div className="sg-proj__media sg-rv">
                   {p.image ? (
                     <a href={p.links[0].href} target="_blank" rel="noreferrer" className="sg-shot" aria-label={`${p.title} — open live site`}>
-                      <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" decoding="async" width={1200} height={750} />
+                      <ProjectMedia p={p} alt="" />
                     </a>
                   ) : (
                     <LifeCard />
@@ -368,7 +369,7 @@ export default function SignalPage() {
                 </div>
                 {k === projects.length - 1 && (
                   <div className="sg-archive sg-rv">
-                    <p className="sg-kicker">Archive</p>
+                    <p className="sg-kicker">More builds</p>
                     <ul>
                       {archive.map((a) => (
                         <li key={a.href}>

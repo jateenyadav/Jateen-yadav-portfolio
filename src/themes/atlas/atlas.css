@@ -576,7 +576,8 @@
   box-shadow: inset 0 0 0 1px var(--line);
 }
 
-.a-proj__media img {
+.a-proj__media img,
+.a-proj__media video {
   display: block;
   width: 100%;
   height: 100%;
@@ -584,7 +585,8 @@
   transition: transform 0.8s var(--ease);
 }
 
-.a-proj__media:hover img {
+.a-proj__media:hover img,
+.a-proj__media:hover video {
   transform: scale(1.03);
 }
 

@@ -682,7 +682,8 @@
   border: 1.5px solid var(--ink);
   background: #fff;
 }
-.rt-print img {
+.rt-print img,
+.rt-print video {
   display: block;
   width: 100%;
   height: 100%;
@@ -702,7 +703,8 @@
   mix-blend-mode: multiply;
   transition: opacity 0.5s;
 }
-.rt-projects li:hover .rt-print img {
+.rt-projects li:hover .rt-print img,
+.rt-projects li:hover .rt-print video {
   filter: none;
 }
 .rt-projects li:hover .rt-print::after {

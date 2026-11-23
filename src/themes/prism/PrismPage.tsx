@@ -4,6 +4,7 @@ import { destroySmoothScroll, gsap, initSmoothScroll, prefersReducedMotion, scro
 import { hasWebGL } from '../../shared/stage'
 import { drawLifeOS } from './lifeosCard'
 import type { PlateSpec, PrismScene } from './scene'
+import ProjectMedia from '../../shared/ProjectMedia'
 
 const NAV = [
   { id: 'about', label: 'About' },
@@ -51,9 +52,11 @@ export default function PrismPage() {
       const q = <T extends HTMLElement>(s: string) => Array.from(page.querySelectorAll<T>(s))
       const plates: PlateSpec[] = [
         ...q('[data-word]').map((el) => ({ el, kind: 'word' as const })),
-        ...q<HTMLElement>('[data-shot]').map((el) =>
-          el.dataset.shot === 'lifeos' ? { el, kind: 'canvas' as const, canvas: lifeos.current! } : { el, kind: 'image' as const, src: el.dataset.shot },
-        ),
+        ...q<HTMLElement>('[data-shot]').map((el): PlateSpec => {
+          const video = el.querySelector('video')
+          if (video) return { el, kind: 'video', video }
+          return el.dataset.shot === 'lifeos' ? { el, kind: 'canvas', canvas: lifeos.current! } : { el, kind: 'image', src: el.dataset.shot }
+        }),
       ]
       scene.setPlates(plates)
       scene.setAnchors(
@@ -214,7 +217,7 @@ export default function PrismPage() {
             {projects.map((p, i) => (
               <article key={p.id} className="p-proj" data-flip={i % 2 === 1 || undefined}>
                 <a className="p-shot" href={p.links[0].href} target="_blank" rel="noreferrer" data-shot={p.image ?? 'lifeos'} aria-label={`${p.title} — open`}>
-                  {p.image ? <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" width={1440} height={900} /> : <canvas ref={lifeos} role="img" aria-label="LifeOS app preview" />}
+                  {p.video || p.image ? <ProjectMedia p={p} alt="" /> : <canvas ref={lifeos} role="img" aria-label="LifeOS app preview" />}
                 </a>
                 <div className="p-proj__body p-reveal">
                   <p className="p-proj__idx">

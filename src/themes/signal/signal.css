@@ -558,7 +558,8 @@ main {
   aspect-ratio: 16 / 10;
 }
 
-.sg-shot img {
+.sg-shot img,
+.sg-shot video {
   display: block;
   width: 100%;
   height: 100%;
@@ -568,7 +569,8 @@ main {
   opacity: 0.92;
 }
 
-.sg-shot:hover img {
+.sg-shot:hover img,
+.sg-shot:hover video {
   transform: scale(1.035);
   opacity: 1;
 }

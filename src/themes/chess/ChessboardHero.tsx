@@ -27,6 +27,10 @@ const NEW_PROJECT_ICONS: Record<string, { icon: string; fallbackIcon: string }> 
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='22' y='12' width='56' height='76' rx='8' fill='%23ffffff'/><rect x='32' y='30' width='36' height='6' rx='3' fill='%23667eea'/><rect x='32' y='46' width='28' height='6' rx='3' fill='%23764ba2'/><circle cx='66' cy='70' r='14' fill='%23667eea'/><path d='M59 70l5 5 9-10' stroke='%23ffffff' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>",
     fallbackIcon: '📝',
   },
+  tinylm: {
+    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='14' y='14' width='72' height='72' rx='20' fill='%23764ba2'/><circle cx='34' cy='38' r='7' fill='%23ffffff'/><circle cx='66' cy='38' r='7' fill='%23ffffff'/><circle cx='50' cy='64' r='7' fill='%23ffffff'/><path d='M34 38L50 64L66 38' stroke='%23ffffff' stroke-width='4' fill='none'/></svg>",
+    fallbackIcon: '🤖',
+  },
 };
 
 const ChessboardHero = () => {

@@ -490,6 +490,7 @@
 }
 
 .p-shot img,
+.p-shot video,
 .p-shot canvas {
   display: block;
   width: 100%;

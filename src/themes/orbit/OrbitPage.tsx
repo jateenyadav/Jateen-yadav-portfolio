@@ -3,6 +3,7 @@ import { archive, experience, hero, modules, profile, projects } from '../../dat
 import { gsap, ScrollTrigger, useGSAP, initSmoothScroll, destroySmoothScroll, scrollToTarget, prefersReducedMotion } from '../../lib/motion'
 import { hasWebGL } from '../../shared/stage'
 import type { OrbitScene, PlanetDef } from './scene'
+import ProjectMedia from '../../shared/ProjectMedia'
 
 /** One planet per module (same order as `modules`). */
 const PLANETS: PlanetDef[] = [
@@ -20,7 +21,9 @@ const PLANETS: PlanetDef[] = [
 /** CSS accent per planet (also used by the fallback, rail and cards). */
 const ACCENT = ['#6fd3ff', '#ff9a6b', '#a9b9ff', '#ffd27a', '#ff9ad8']
 /** Which planet each project belongs to (by its main module). */
-const PROJECT_PLANET: Record<string, number> = { lifeos: 1, examace: 3, solar: 4, client: 0 }
+const PROJECT_PLANET: Record<string, number> = { lifeos: 1, examace: 3, tinylm: 3, solar: 4, client: 0 }
+
+const COUNT: Record<number, string> = { 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 7: 'Seven' }
 
 const go = (target: string) => scrollToTarget(target, 0)
 const tourStop = (i: number) => {
@@ -338,7 +341,7 @@ export default function OrbitPage() {
             <header className="o-head o-rise">
               <p className="o-eyebrow">Launched</p>
               <h2 className="o-h2">Things I’ve put into orbit</h2>
-              <p className="o-head__aside">Four products, each tagged with the planet it grew from.</p>
+              <p className="o-head__aside">{COUNT[projects.length] ?? projects.length} products, each tagged with the planet it grew from.</p>
             </header>
             <div className="o-work">
               {projects.map((p) => {
@@ -346,7 +349,7 @@ export default function OrbitPage() {
                 return (
                   <article key={p.id} className="o-proj o-rise" style={{ ['--c' as string]: ACCENT[pi] }}>
                     <a className="o-proj__img" href={p.links[0].href} target="_blank" rel="noreferrer" aria-label={`${p.title} — ${p.links[0].label}`}>
-                      {p.image ? <img src={p.image} alt="" loading="lazy" /> : <LifeCard />}
+                      {p.video || p.image ? <ProjectMedia p={p} alt="" /> : <LifeCard />}
                     </a>
                     <div className="o-proj__body">
                       <p className="o-proj__meta">

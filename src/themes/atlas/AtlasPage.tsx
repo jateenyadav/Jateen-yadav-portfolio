@@ -4,6 +4,7 @@ import { destroySmoothScroll, gsap, initSmoothScroll, prefersReducedMotion, scro
 import { hasWebGL } from '../../shared/stage'
 import { PLACES, views, type View } from './places'
 import type { AtlasScene, Stop } from './scene'
+import ProjectMedia from '../../shared/ProjectMedia'
 
 const NAV = [
   { id: 'about', label: 'About' },
@@ -17,6 +18,7 @@ const NAV = [
 const PIN: Record<string, string> = {
   lifeos: 'Pinned at Gurugram — built at home base',
   examace: 'Pinned on India — practice papers for CBSE & JEE students',
+  tinylm: 'Pinned at Gurugram — trained on a laptop at home, runs in any browser',
   solar: 'Pinned at Sriharikota — where India’s space missions launch',
   client: 'Pinned at Dubai — delivered to a Dubai-based client',
 }
@@ -27,6 +29,7 @@ const LABEL_SUB: Record<string, string> = {
   radaur: 'B.Tech, 2019–2023',
   lifeos: 'Web + Android',
   examace: 'CBSE & JEE',
+  tinylm: 'Trained at home',
   solar: 'Indian space missions',
   client: 'Client site',
 }
@@ -284,7 +287,7 @@ export default function AtlasPage() {
             <article key={p.id} className="a-stop a-col" data-stop={p.id}>
               <div className="a-card a-proj">
                 <a className="a-proj__media" href={p.links[0].href} target="_blank" rel="noreferrer" aria-label={`Open ${p.title}`}>
-                  {p.image ? <img src={p.image} alt={`${p.title} screenshot`} loading="lazy" width={1440} height={900} /> : <LifeOSCard />}
+                  {p.video || p.image ? <ProjectMedia p={p} /> : <LifeOSCard />}
                 </a>
                 <p className="a-pin">
                   <i aria-hidden="true" />

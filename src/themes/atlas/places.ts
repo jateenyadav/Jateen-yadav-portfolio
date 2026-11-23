@@ -5,7 +5,7 @@
  * Sriharikota (India's launch site — the Solar System project features Indian space missions).
  */
 export type Place = { id: string; name: string; lat: number; lon: number; group: Group }
-export type Group = 'base' | 'teams' | 'work' | 'edu'
+export type Group = 'base' | 'teams' | 'work' | 'edu' | 'lab'
 
 export const PLACES: Place[] = [
   { id: 'ggn', name: 'Gurugram', lat: 28.46, lon: 77.03, group: 'base' },
@@ -14,6 +14,7 @@ export const PLACES: Place[] = [
   { id: 'radaur', name: 'JMIT Radaur', lat: 30.03, lon: 77.15, group: 'edu' },
   { id: 'lifeos', name: 'LifeOS', lat: 28.46, lon: 77.03, group: 'work' },
   { id: 'examace', name: 'ExamAce', lat: 22.6, lon: 79.2, group: 'work' },
+  { id: 'tinylm', name: 'TinyLM', lat: 28.46, lon: 77.03, group: 'lab' },
   { id: 'solar', name: 'Solar System', lat: 13.72, lon: 80.23, group: 'work' },
   { id: 'client', name: 'Client Portfolio', lat: 25.2, lon: 55.27, group: 'work' },
 ]
@@ -57,6 +58,8 @@ export function views(phone: boolean): { hero: View; about: View; skills: View; 
     work: {
       lifeos: { lat: 26, lon: 74, dist: 2.7 * pd, x: side, y: py, labels: { lifeos: 1, base: 0 }, arcs: {} },
       examace: { lat: 21, lon: 78, dist: 2.7 * pd, x: side, y: py, labels: { examace: 1, lifeos: 0.5 }, arcs: { examace: [1, 1] } },
+      // TinyLM was trained at home but runs in any browser, so the camera pulls back from Gurugram
+      tinylm: { lat: 27, lon: 77, dist: 3.4 * pd, x: side, y: py, labels: { tinylm: 1, examace: 0.4 }, arcs: { examace: [0.35, 1] } },
       solar: { lat: 17, lon: 79, dist: 2.7 * pd, x: side, y: py, labels: { solar: 1, examace: 0.4, lifeos: 0.5 }, arcs: { solar: [1, 1], examace: [0.35, 1] } },
       client: { lat: 25, lon: 64, dist: 2.9 * pd, x: side, y: py, labels: { client: 1, lifeos: 0.5, solar: 0.4, examace: 0.4 }, arcs: { client: [1, 1], solar: [0.35, 1], examace: [0.35, 1] } },
     } as Record<string, View>,

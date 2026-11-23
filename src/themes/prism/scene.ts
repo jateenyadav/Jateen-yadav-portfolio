@@ -23,6 +23,7 @@ import {
   TextureLoader,
   TorusGeometry,
   Vector2,
+  VideoTexture,
   type BufferGeometry,
   type Texture,
 } from 'three'
@@ -36,7 +37,7 @@ import { createStage, type StageFrame } from '../../shared/stage'
  * of scroll position, so the scene never trails behind the page.
  */
 
-export type PlateSpec = { el: HTMLElement; kind: 'word' | 'image' | 'canvas'; src?: string; canvas?: HTMLCanvasElement }
+export type PlateSpec = { el: HTMLElement; kind: 'word' | 'image' | 'canvas' | 'video'; src?: string; canvas?: HTMLCanvasElement; video?: HTMLVideoElement }
 
 export type PrismScene = {
   /** Section anchors (the element whose top defines each arrangement), hero first. */
@@ -406,6 +407,31 @@ export function createPrismScene(canvas: HTMLCanvasElement, opts: { onReady?: ()
         spec.el.dataset.glready = ''
         stage?.invalidate()
       })
+    } else if (spec.kind === 'video' && spec.video) {
+      // the DOM <video> keeps playing (it only fades out once the plate is up); the plate samples it
+      const v = spec.video
+      const show = () => {
+        if (disposed || p.tex) return
+        const t = new VideoTexture(v)
+        t.colorSpace = SRGBColorSpace
+        p.tex = t
+        ;(mesh.material as ShaderMaterial).uniforms.uMap.value = t
+        fitCover(p)
+        mesh.visible = true
+        spec.el.dataset.glready = ''
+        stage?.invalidate()
+      }
+      if (v.readyState >= 2) show()
+      else v.addEventListener('loadeddata', show, { once: true })
+      // the stage renders on demand, so ask for a frame whenever the video has a new one
+      if ('requestVideoFrameCallback' in v) {
+        const tick = () => {
+          if (disposed) return
+          if (p.tex && p.mesh.visible) stage?.invalidate()
+          v.requestVideoFrameCallback(tick)
+        }
+        v.requestVideoFrameCallback(tick)
+      }
     } else if (spec.kind === 'canvas' && spec.canvas) {
       const t = new CanvasTexture(spec.canvas)
       t.colorSpace = SRGBColorSpace
@@ -418,8 +444,9 @@ export function createPrismScene(canvas: HTMLCanvasElement, opts: { onReady?: ()
   }
 
   function fitCover(p: Plate) {
-    const img = p.tex?.image as { width: number; height: number } | undefined
-    if (!img || !p.w) return
+    const src = p.tex?.image as { width: number; height: number; videoWidth?: number; videoHeight?: number } | undefined
+    if (!src || !p.w) return
+    const img = src.videoWidth ? { width: src.videoWidth, height: src.videoHeight! } : src
     const u = (p.mesh.material as ShaderMaterial).uniforms
     // cover: crop the image vertically if the box is wider than the image
     const boxR = p.w / p.h

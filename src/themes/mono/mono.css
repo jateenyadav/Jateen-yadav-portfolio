@@ -792,7 +792,9 @@ button:hover > .m-arrow {
 }
 
 .m-deck__shot > img,
-.m-pl__img > img {
+.m-deck__shot > video,
+.m-pl__img > img,
+.m-pl__img > video {
   width: 100%;
   height: 100%;
   display: block;

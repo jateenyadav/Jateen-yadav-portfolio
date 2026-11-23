@@ -1,4 +1,5 @@
 import type { Ball, Formation } from './scene'
+import { projects } from '../../data/content'
 
 /** Small idle orbit so the metal never sits dead still. */
 const bob = (t: number, i: number, a = 0.05): [number, number, number] => [
@@ -54,16 +55,19 @@ const five: Formation['balls'] = (t) =>
     0.03,
   )
 
-/** 3–6 — projects: four drops; the one being read swells to the middle. */
-const four = (k: number): Formation['balls'] => (t) => {
-  const balls: Ball[] = [0, 1, 2, 3].map((j) => {
+/** Projects: one drop per project; the one being read swells to the middle. Always 6 balls. */
+const ring = (n: number, k: number): Formation['balls'] => (t) => {
+  const balls: Ball[] = Array.from({ length: n }, (_, j): Ball => {
     if (j === k) return [0, 0, 0, 0.56]
-    const a = ((j - k + 4) % 4) * (Math.PI / 2) + Math.PI * 0.75 + t * 0.12
+    const a = ((j - k + n) % n) * ((Math.PI * 2) / n) + Math.PI * 0.75 + t * 0.12
     return [Math.cos(a) * 0.98, Math.sin(a) * 0.82, Math.sin(a) * 0.2, 0.17]
   })
-  balls.push([0, 0, 0, 0], [0, 0, 0, 0])
+  while (balls.length < 6) balls.push([0, 0, 0, 0])
   return withBob(balls, t, 0.035)
 }
+
+const PROJECT_TINTS = ['#7cf0b0', '#ffcf5a', '#b58cff', '#ff8a4c', '#ff7ad1', '#7ad7ff']
+const SHOWN = projects.slice(0, 6)
 
 /** 7 — experience: a drip of six roles, the newest the largest. */
 const drip: Formation['balls'] = (t) =>
@@ -77,10 +81,7 @@ export const FORMATIONS: (Formation & { name: string })[] = [
   { name: 'One drop', balls: drop(1.22), tint: '#c8ff5a' },
   { name: 'The hard middle', balls: bridge, tint: '#7ad7ff' },
   { name: 'Five modules', balls: five, tint: '#c8ff5a', k: 0.2 },
-  { k: 0.34, name: 'LifeOS', balls: four(0), tint: '#7cf0b0' },
-  { k: 0.34, name: 'ExamAce', balls: four(1), tint: '#ffcf5a' },
-  { k: 0.34, name: 'Solar System', balls: four(2), tint: '#ff8a4c' },
-  { k: 0.34, name: 'Client Portfolio', balls: four(3), tint: '#ff7ad1' },
+  ...SHOWN.map((p, i) => ({ k: 0.34, name: p.title, balls: ring(SHOWN.length, i), tint: PROJECT_TINTS[i % PROJECT_TINTS.length] })),
   { name: 'Six roles', balls: drip, tint: '#9db4ff', k: 0.16 },
   { name: 'One drop', balls: drop(1.15), tint: '#c8ff5a' },
 ]
