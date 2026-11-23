@@ -78,7 +78,7 @@ export default function ThemeSwitcher({ current, surprise, onSelect, onSurprise,
   return (
     <div ref={root} className="tsw" data-open={open || undefined} data-compact={(compact && !open) || undefined}>
       {open && (
-        <div className="tsw__panel" id={menuId} role="menu" aria-label="Choose a theme">
+        <div className="tsw__panel" id={menuId} role="menu" aria-label="Choose a theme" data-lenis-prevent>
           <p className="tsw__title">Theme</p>
           {THEMES.map((t) => (
             <button
@@ -111,21 +111,23 @@ export default function ThemeSwitcher({ current, surprise, onSelect, onSurprise,
         </div>
       )}
       <div className="tsw__row">
-        <button
-          ref={lookButton}
-          type="button"
-          className="tsw__btn tsw__btn--look"
-          aria-label="New look: give the page a brand-new random style"
-          title="New colours, fonts & motion. Never the same twice"
-          onPointerEnter={onOpen}
-          onFocus={onOpen}
-          onClick={newLook}
-        >
-          <span className="tsw__spark" aria-hidden="true">
-            ✨
-          </span>
-          <span className="tsw__label">New look</span>
-        </button>
+        {current === 'assembly' && (
+          <button
+            ref={lookButton}
+            type="button"
+            className="tsw__btn tsw__btn--look"
+            aria-label="New look: give the page a brand-new random style"
+            title="New colours, fonts & motion. Never the same twice"
+            onPointerEnter={onOpen}
+            onFocus={onOpen}
+            onClick={newLook}
+          >
+            <span className="tsw__spark" aria-hidden="true">
+              ✨
+            </span>
+            <span className="tsw__label">New look</span>
+          </button>
+        )}
         <button
           ref={button}
           type="button"
