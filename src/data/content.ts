@@ -9,7 +9,7 @@ export const profile = {
   roles: ['Full Stack', 'Flutter', 'AI / LLM'],
   location: 'Gurugram, India',
   timezone: 'Asia/Kolkata',
-  email: 'jateen.yadav1@gmail.com',
+  email: 'jateenyadav.dev@gmail.com',
   resume: '/Jateen_Yadav_Resume.pdf',
   portrait: '/portrait.jpg',
   status: 'Available for new roles',
